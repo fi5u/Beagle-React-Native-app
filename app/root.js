@@ -6,20 +6,40 @@ import {
 } from 'react-native'
 import Drawer from 'react-native-drawer'
 import Menu from './components/menu/menu'
+import Websites from './components/websites/websites'
+import Settings from './components/settings/settings'
 import styles from './root.style'
 
 export default class Root extends Component {
-    handleMenuItemPress(id) {
-        alert('This ' + id);
+    constructor(props) {
+        super(props);
+        this.state = {
+            // Menu
+            activeMenuItem: 'websites'
+        };
+    }
+
+    handleMenuItemPress(newMenuItemID) {
+        this.setState({activeMenuItem: newMenuItemID});
+        this._drawer.close();
     }
 
     render() {
+        let activePage;
+        switch(this.state.activeMenuItem) {
+            case 'settings':
+                activePage = <Settings />;
+                break;
+            default:
+                activePage = <Websites />;
+        }
+
         return (
             <Drawer
                 ref={(ref) => this._drawer = ref}
                 content={
                     <Menu
-                        handleMenuItemPress={this.handleMenuItemPress}
+                        handleMenuItemPress={this.handleMenuItemPress.bind(this)}
                     />
                 }
                 type="static"
@@ -30,16 +50,7 @@ export default class Root extends Component {
                 <View
                     style={styles.base}
                 >
-                    <Text style={styles.welcome}>
-                        Welcome to React Native!
-                    </Text>
-                    <Text style={styles.instructions}>
-                        To get started, edit index.android.js
-                    </Text>
-                    <Text style={styles.instructions}>
-                        Touble tap R on your keyboard to reload,{'\n'}
-                        Shake or press menu button for dev menu
-                    </Text>
+                    {activePage}
                 </View>
             </Drawer>
         )
