@@ -14,7 +14,7 @@ export default class MenuItem extends Component {
         return (
             <TouchableOpacity
                 style={styles.base}
-                onPress={() => this.props.handleMenuItemPress(this.props.title)}
+                onPress={() => this.props.handleMenuItemPress(this.props.id)}
             >
                 <Text
                     style={styles.text}

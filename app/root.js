@@ -9,8 +9,8 @@ import Menu from './components/menu/menu'
 import styles from './root.style'
 
 export default class Root extends Component {
-    handleMenuItemPress(title) {
-        alert('This' + title);
+    handleMenuItemPress(id) {
+        alert('This ' + id);
     }
 
     render() {
