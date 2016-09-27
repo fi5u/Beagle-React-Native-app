@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {
     Text,
-    View
+    TouchableOpacity
 } from 'react-native'
 import styles from './menu-item.style'
 
@@ -12,19 +12,22 @@ export default class MenuItem extends Component {
 
     render() {
         return (
-            <View
+            <TouchableOpacity
                 style={styles.base}
+                onPress={() => this.props.handleMenuItemPress(this.props.title)}
             >
                 <Text
                     style={styles.text}
                 >
                     {this.props.title}
                 </Text>
-            </View>
+            </TouchableOpacity>
         )
     }
 }
 
 MenuItem.propTypes = {
+    id: React.PropTypes.string.isRequired,
     title: React.PropTypes.string.isRequired,
+    handleMenuItemPress: React.PropTypes.func.isRequired,
 }

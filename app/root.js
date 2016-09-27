@@ -9,11 +9,19 @@ import Menu from './components/menu/menu'
 import styles from './root.style'
 
 export default class Root extends Component {
+    handleMenuItemPress(title) {
+        alert('This' + title);
+    }
+
     render() {
         return (
             <Drawer
                 ref={(ref) => this._drawer = ref}
-                content={<Menu />}
+                content={
+                    <Menu
+                        handleMenuItemPress={this.handleMenuItemPress}
+                    />
+                }
                 type="static"
                 openDrawerOffset={100}
                 tweenHandler={Drawer.tweenPresets.parallax}

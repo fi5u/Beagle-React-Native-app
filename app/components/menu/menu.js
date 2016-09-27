@@ -23,7 +23,9 @@ export default class Menu extends Component {
             return (
                 <MenuItem
                     key={item.id}
+                    id={item.id}
                     title={item.title}
+                    handleMenuItemPress={this.props.handleMenuItemPress}
                 />
             );
         });
@@ -36,4 +38,8 @@ export default class Menu extends Component {
             </View>
         )
     }
+}
+
+Menu.propTypes = {
+    handleMenuItemPress: React.PropTypes.func.isRequired,
 }
