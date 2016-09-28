@@ -3,7 +3,7 @@ import {
     Text,
     View
 } from 'react-native'
-import Header from '../layout/header/header'
+import Screen from '../layout/screen/screen'
 import styles from './settings.style'
 
 export default class Settings extends Component {
@@ -13,11 +13,11 @@ export default class Settings extends Component {
 
     render() {
         return (
-            <View>
-                <Header
-                    title="Settings"
-                />
-            </View>
+            <Screen
+                title="Settings"
+            >
+                <Text>SETTINGS</Text>
+            </Screen>
         )
     }
 }

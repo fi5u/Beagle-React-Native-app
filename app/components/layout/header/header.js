@@ -13,7 +13,7 @@ export default class Header extends Component {
     render() {
         return (
             <View
-                style={styles.base}
+                style={[this.props.customStyle, styles.base]}
             >
                 <Text>{this.props.title}</Text>
             </View>
