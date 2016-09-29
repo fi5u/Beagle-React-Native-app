@@ -18,6 +18,7 @@ export default class Screen extends Component {
                 <Header
                     title={this.props.title}
                     customStyle={styles.header}
+                    buttons={this.props.buttons}
                 />
 
                 <View
@@ -33,4 +34,12 @@ export default class Screen extends Component {
 Screen.propTypes = {
     children: React.PropTypes.node,
     title: React.PropTypes.string,
+    buttons: React.PropTypes.arrayOf(
+        React.PropTypes.shape({
+            id: React.PropTypes.string,
+            position: React.PropTypes.oneOf(['primary', 'secondary']),
+            title: React.PropTypes.string,
+            onPress: React.PropTypes.func,
+        })
+    ),
 }

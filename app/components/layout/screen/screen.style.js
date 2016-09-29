@@ -3,11 +3,10 @@ import {StyleSheet} from 'react-native'
 const Styles = StyleSheet.create({
     base: {
         flex: 1,
-        justifyContent: 'space-between',
-        paddingTop: 22,
+        backgroundColor: 'red',
     },
     header: {
-        flex: 1,
+        height: 50,
     },
     body: {
         flex: 1,

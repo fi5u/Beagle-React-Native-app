@@ -15,6 +15,17 @@ export default class Websites extends Component {
         return (
             <Screen
                 title="Websites"
+                buttons={[{
+                    id: 'add',
+                    position: 'primary',
+                    title: 'Add',
+                    onPress: this.props.handleStartAddWebsite
+                }, {
+                    id: 'somthing',
+                    position: 'secondary',
+                    title: 'Somthin',
+                    onPress: this.props.handleStartAddWebsite
+                }]}
             >
                 <Text>WEBSITES</Text>
             </Screen>
@@ -23,5 +34,5 @@ export default class Websites extends Component {
 }
 
 Websites.propTypes = {
-
+    handleStartAddWebsite: React.PropTypes.func.isRequired,
 }

@@ -17,9 +17,15 @@ export default class Root extends Component {
         };
     }
 
+    // MENU
     handleMenuItemPress(newMenuItemID) {
         this.setState({activeMenuItem: newMenuItemID});
         this._drawer.close();
+    }
+
+    // WEBSITES
+    handleStartAddWebsite() {
+        alert('start to add website');
     }
 
     render() {
@@ -29,7 +35,10 @@ export default class Root extends Component {
                 activePage = <Settings />;
                 break;
             default:
-                activePage = <Websites />;
+                activePage =
+                    <Websites
+                        handleStartAddWebsite={this.handleStartAddWebsite.bind(this)}
+                    />;
         }
 
         return (
