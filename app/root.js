@@ -17,6 +17,7 @@ export default class Root extends Component {
 
             // Websites
             websites: [],
+            websiteModalIsVisible: false,
         };
     }
 
@@ -28,7 +29,11 @@ export default class Root extends Component {
 
     // WEBSITES
     handleStartAddWebsite() {
-        alert('start to add website');
+        this.setState({websiteModalIsVisible: true});
+    }
+
+    handleHideWebsiteModal() {
+        this.setState({websiteModalIsVisible: false});
     }
 
     render() {
@@ -41,6 +46,8 @@ export default class Root extends Component {
                 activePage =
                     <Websites
                         handleStartAddWebsite={this.handleStartAddWebsite.bind(this)}
+                        websiteModalIsVisible={this.state.websiteModalIsVisible}
+                        hideWebsiteModal={this.handleHideWebsiteModal.bind(this)}
                     />;
         }
 
