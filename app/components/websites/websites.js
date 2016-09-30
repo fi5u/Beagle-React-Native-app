@@ -20,11 +20,6 @@ export default class Websites extends Component {
                     position: 'primary',
                     title: 'Add',
                     onPress: this.props.handleStartAddWebsite
-                }, {
-                    id: 'somthing',
-                    position: 'secondary',
-                    title: 'Somthin',
-                    onPress: this.props.handleStartAddWebsite
                 }]}
             >
                 <Text>WEBSITES</Text>

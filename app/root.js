@@ -13,7 +13,10 @@ export default class Root extends Component {
         super(props);
         this.state = {
             // Menu
-            activeMenuItem: 'websites'
+            activeMenuItem: 'websites',
+
+            // Websites
+            websites: [],
         };
     }
 
