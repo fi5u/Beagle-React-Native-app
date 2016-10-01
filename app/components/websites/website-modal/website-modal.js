@@ -28,7 +28,8 @@ export default class WebsiteModal extends Component {
             default:
                 layout =
                     <AutoInputLayout
-
+                        setStateFromComp={this.props.setStateFromComp}
+                        websiteInputAutoValue={this.props.websiteInputAutoValue}
                     />;
         }
 
@@ -83,4 +84,6 @@ WebsiteModal.propTypes = {
     modalClosed: React.PropTypes.func.isRequired,
     websiteInputMode: React.PropTypes.oneOf(['auto', 'custom']).isRequired,
     setWebsiteInputMode: React.PropTypes.func.isRequired,
+    setStateFromComp: React.PropTypes.func.isRequired,
+    websiteInputAutoValue: React.PropTypes.string.isRequired,
 }

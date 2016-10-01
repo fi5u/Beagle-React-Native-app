@@ -19,12 +19,18 @@ export default class Root extends Component {
             websites: [],
             websiteModalIsVisible: false,
             websiteInputMode: 'auto',
+            websiteInputAutoValue: '',
         };
 
         this.allowedInputModes = [
             'custom',
             'auto'
         ];
+    }
+
+    // STATE SETTING
+    setStateFromComp(state, value) {
+        this.setState({[state]: value})
     }
 
     // MENU
@@ -65,6 +71,7 @@ export default class Root extends Component {
             default:
                 activePage =
                     <Websites
+                        setStateFromComp={this.setStateFromComp.bind(this)}
                         handleStartAddWebsite={this.handleStartAddWebsite.bind(this)}
                         websiteModalIsVisible={this.state.websiteModalIsVisible}
                         hideWebsiteModal={this.handleHideWebsiteModal.bind(this)}
@@ -72,6 +79,7 @@ export default class Root extends Component {
                         websiteModalClosed={this.handleWebsiteModalClose.bind(this)}
                         websiteInputMode={this.state.websiteInputMode}
                         setWebsiteInputMode={this.setWebsiteInputMode.bind(this)}
+                        websiteInputAutoValue={this.state.websiteInputAutoValue}
                     />;
         }
 

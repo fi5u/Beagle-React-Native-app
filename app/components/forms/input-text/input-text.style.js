@@ -2,10 +2,8 @@ import {StyleSheet} from 'react-native'
 
 const Styles = StyleSheet.create({
     base: {
-
-    },
-    tabContentBase: {
-        paddingTop: 22,
+        paddingTop: 6,
+        paddingBottom: 6,
     },
 })
 

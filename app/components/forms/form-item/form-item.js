@@ -3,9 +3,9 @@ import {
     Text,
     View
 } from 'react-native'
-import styles from './website-modal.style'
+import styles from './form-item.style'
 
-export default class CustomInputLayout extends Component {
+export default class FormItem extends Component {
     constructor(props) {
         super(props);
     }
@@ -13,14 +13,14 @@ export default class CustomInputLayout extends Component {
     render() {
         return (
             <View
-                style={styles.tabContentBase}
+                style={styles.base}
             >
-                <Text>CUSTOM</Text>
+                {this.props.children}
             </View>
         )
     }
 }
 
-CustomInputLayout.propTypes = {
-
+FormItem.propTypes = {
+    children: React.PropTypes.node.isRequired,
 }
