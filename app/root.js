@@ -18,7 +18,13 @@ export default class Root extends Component {
             // Websites
             websites: [],
             websiteModalIsVisible: false,
+            websiteInputMode: 'auto',
         };
+
+        this.allowedInputModes = [
+            'custom',
+            'auto'
+        ];
     }
 
     // MENU
@@ -44,6 +50,12 @@ export default class Root extends Component {
         alert('is closed');
     }
 
+    setWebsiteInputMode(mode) {
+        if(this.allowedInputModes.indexOf(mode) > -1) {
+            this.setState({websiteInputMode: mode});
+        }
+    }
+
     render() {
         let activePage;
         switch(this.state.activeMenuItem) {
@@ -58,6 +70,8 @@ export default class Root extends Component {
                         hideWebsiteModal={this.handleHideWebsiteModal.bind(this)}
                         saveWebsite={this.handleSaveWebsite.bind(this)}
                         websiteModalClosed={this.handleWebsiteModalClose.bind(this)}
+                        websiteInputMode={this.state.websiteInputMode}
+                        setWebsiteInputMode={this.setWebsiteInputMode.bind(this)}
                     />;
         }
 

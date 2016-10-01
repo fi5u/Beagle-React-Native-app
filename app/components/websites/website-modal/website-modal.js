@@ -5,8 +5,11 @@ import {
     TouchableHighlight,
     View
 } from 'react-native'
-import styles from './website-modal.style'
+import Tabs from 'react-native-tabs'
 import Header from '../../layout/header/header'
+import AutoInputLayout from './auto-input-layout'
+import CustomInputLayout from './custom-input-layout'
+import styles from './website-modal.style'
 
 export default class WebsiteModal extends Component {
     constructor(props) {
@@ -14,6 +17,21 @@ export default class WebsiteModal extends Component {
     }
 
     render() {
+        let layout;
+        switch(this.props.websiteInputMode) {
+            case 'custom':
+                layout =
+                    <CustomInputLayout
+
+                    />;
+                    break;
+            default:
+                layout =
+                    <AutoInputLayout
+
+                    />;
+        }
+
         return (
             <Modal
                 animationType={'slide'}
@@ -21,22 +39,38 @@ export default class WebsiteModal extends Component {
                 visible={this.props.websiteModalIsVisible}
                 onRequestClose={this.props.modalClosed}
             >
-                <View>
-                    <Header
-                        title="Add a website"
-                        buttons={[{
-                            id: 'closeWebsiteModal',
-                            position: 'secondary',
-                            title: 'Close',
-                            onPress: this.props.hideModal,
-                        }, {
-                            id: 'saveWebsite',
-                            position: 'primary',
-                            title: 'Save',
-                            onPress: this.props.saveWebsite,
-                        }]}
-                    />
-                </View>
+                <Header
+                    title="Add a website"
+                    buttons={[{
+                        id: 'closeWebsiteModal',
+                        position: 'secondary',
+                        title: 'Close',
+                        onPress: this.props.hideModal,
+                    }, {
+                        id: 'saveWebsite',
+                        position: 'primary',
+                        title: 'Save',
+                        onPress: this.props.saveWebsite,
+                    }]}
+                />
+                <Tabs
+                    selected={this.props.websiteInputMode}
+                    onSelect={el => this.props.setWebsiteInputMode(el.props.id)}
+                >
+                    <Text
+                        id="auto"
+                    >
+                        Auto
+                    </Text>
+
+                    <Text
+                        id="custom"
+                    >
+                        Custom
+                    </Text>
+                </Tabs>
+
+                {layout}
             </Modal>
         )
     }
@@ -47,4 +81,6 @@ WebsiteModal.propTypes = {
     hideModal: React.PropTypes.func.isRequired,
     saveWebsite: React.PropTypes.func.isRequired,
     modalClosed: React.PropTypes.func.isRequired,
+    websiteInputMode: React.PropTypes.oneOf(['auto', 'custom']).isRequired,
+    setWebsiteInputMode: React.PropTypes.func.isRequired,
 }

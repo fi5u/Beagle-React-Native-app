@@ -28,6 +28,8 @@ export default class Websites extends Component {
                     hideModal={this.props.hideWebsiteModal}
                     saveWebsite={this.props.saveWebsite}
                     modalClosed={this.props.websiteModalClosed}
+                    websiteInputMode={this.props.websiteInputMode}
+                    setWebsiteInputMode={this.props.setWebsiteInputMode}
                 />
             </Screen>
         )
@@ -39,4 +41,6 @@ Websites.propTypes = {
     websiteModalIsVisible: React.PropTypes.bool.isRequired,
     hideWebsiteModal: React.PropTypes.func.isRequired,
     websiteModalClosed: React.PropTypes.func.isRequired,
+    websiteInputMode: React.PropTypes.oneOf(['auto', 'custom']).isRequired,
+    setWebsiteInputMode: React.PropTypes.func.isRequired,
 }
