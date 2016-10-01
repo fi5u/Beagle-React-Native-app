@@ -26,6 +26,8 @@ export default class Websites extends Component {
                 <WebsiteModal
                     websiteModalIsVisible={this.props.websiteModalIsVisible}
                     hideModal={this.props.hideWebsiteModal}
+                    saveWebsite={this.props.saveWebsite}
+                    modalClosed={this.props.websiteModalClosed}
                 />
             </Screen>
         )
@@ -36,4 +38,5 @@ Websites.propTypes = {
     handleStartAddWebsite: React.PropTypes.func.isRequired,
     websiteModalIsVisible: React.PropTypes.bool.isRequired,
     hideWebsiteModal: React.PropTypes.func.isRequired,
+    websiteModalClosed: React.PropTypes.func.isRequired,
 }

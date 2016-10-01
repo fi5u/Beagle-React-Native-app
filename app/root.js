@@ -36,6 +36,14 @@ export default class Root extends Component {
         this.setState({websiteModalIsVisible: false});
     }
 
+    handleSaveWebsite() {
+        alert('saving');
+    }
+
+    handleWebsiteModalClose() {
+        alert('is closed');
+    }
+
     render() {
         let activePage;
         switch(this.state.activeMenuItem) {
@@ -48,6 +56,8 @@ export default class Root extends Component {
                         handleStartAddWebsite={this.handleStartAddWebsite.bind(this)}
                         websiteModalIsVisible={this.state.websiteModalIsVisible}
                         hideWebsiteModal={this.handleHideWebsiteModal.bind(this)}
+                        saveWebsite={this.handleSaveWebsite.bind(this)}
+                        websiteModalClosed={this.handleWebsiteModalClose.bind(this)}
                     />;
         }
 
