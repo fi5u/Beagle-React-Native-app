@@ -19,7 +19,9 @@ export default class InputText extends Component {
                     style={styles.base}
                     placeholder={this.props.placeholder}
                     onChangeText={(text) => this.props.setStateFromComp(this.props.id, text)}
+                    onSubmitEditing={this.props.handleSubmit.bind(this)}
                     value={this.props.value}
+                    editable={this.props.editable}
                 />
             </FormItem>
         )
@@ -31,4 +33,6 @@ InputText.propTypes = {
     placeholder: React.PropTypes.string,
     setStateFromComp: React.PropTypes.func.isRequired,
     value: React.PropTypes.string.isRequired,
+    handleSubmit: React.PropTypes.func.isRequired,
+    editable: React.PropTypes.bool.isRequired,
 }

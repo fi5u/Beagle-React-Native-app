@@ -22,6 +22,8 @@ export default class AutoInputLayout extends Component {
                     placeholder="Website address"
                     setStateFromComp={this.props.setStateFromComp}
                     value={this.props.websiteInputAutoValue}
+                    handleSubmit={this.props.checkAutoWebsite}
+                    editable={!this.props.websiteInputsDisabled}
                 />
             </View>
         )
@@ -31,4 +33,6 @@ export default class AutoInputLayout extends Component {
 AutoInputLayout.propTypes = {
     setStateFromComp: React.PropTypes.func.isRequired,
     websiteInputAutoValue: React.PropTypes.string.isRequired,
+    checkAutoWebsite: React.PropTypes.func.isRequired,
+    websiteInputsDisabled: React.PropTypes.bool.isRequired,
 }

@@ -20,6 +20,7 @@ export default class Root extends Component {
             websiteModalIsVisible: false,
             websiteInputMode: 'auto',
             websiteInputAutoValue: '',
+            websiteInputsDisabled: false,
         };
 
         this.allowedInputModes = [
@@ -49,7 +50,7 @@ export default class Root extends Component {
     }
 
     handleSaveWebsite() {
-        alert('saving');
+        //alert('saving');
     }
 
     handleWebsiteModalClose() {
@@ -60,6 +61,10 @@ export default class Root extends Component {
         if(this.allowedInputModes.indexOf(mode) > -1) {
             this.setState({websiteInputMode: mode});
         }
+    }
+
+    checkAutoWebsite() {
+        this.setState({websiteInputsDisabled: true});
     }
 
     render() {
@@ -80,6 +85,8 @@ export default class Root extends Component {
                         websiteInputMode={this.state.websiteInputMode}
                         setWebsiteInputMode={this.setWebsiteInputMode.bind(this)}
                         websiteInputAutoValue={this.state.websiteInputAutoValue}
+                        checkAutoWebsite={this.checkAutoWebsite.bind(this)}
+                        websiteInputsDisabled={this.state.websiteInputsDisabled}
                     />;
         }
 
