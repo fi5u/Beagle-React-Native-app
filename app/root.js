@@ -20,6 +20,7 @@ export default class Root extends Component {
             websiteModalIsVisible: false,
             websiteInputMode: 'auto',
             websiteInputAutoValue: '',
+            websiteInputTemplateValue: '',
             websiteInputsDisabled: false,
         };
 
@@ -85,6 +86,7 @@ export default class Root extends Component {
                         websiteInputMode={this.state.websiteInputMode}
                         setWebsiteInputMode={this.setWebsiteInputMode.bind(this)}
                         websiteInputAutoValue={this.state.websiteInputAutoValue}
+                        websiteInputTemplateValue={this.state.websiteInputTemplateValue}
                         checkAutoWebsite={this.checkAutoWebsite.bind(this)}
                         websiteInputsDisabled={this.state.websiteInputsDisabled}
                     />;

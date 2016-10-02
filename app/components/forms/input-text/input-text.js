@@ -21,9 +21,10 @@ export default class InputText extends Component {
                     style={styles.base}
                     placeholder={this.props.placeholder}
                     onChangeText={(text) => this.props.setStateFromComp(this.props.id, text)}
-                    onSubmitEditing={this.props.handleSubmit.bind(this)}
+                    onSubmitEditing={this.props.handleSubmit}
                     value={this.props.value}
                     editable={this.props.editable}
+                    keyboardType={this.props.keyboardType}
                 />
             </FormItem>
         )
@@ -35,7 +36,8 @@ InputText.propTypes = {
     placeholder: React.PropTypes.string,
     setStateFromComp: React.PropTypes.func.isRequired,
     value: React.PropTypes.string.isRequired,
-    handleSubmit: React.PropTypes.func.isRequired,
+    handleSubmit: React.PropTypes.func,
     editable: React.PropTypes.bool.isRequired,
     label: React.PropTypes.string,
+    keyboardType: React.PropTypes.string,
 }

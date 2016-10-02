@@ -22,7 +22,9 @@ export default class WebsiteModal extends Component {
             case 'custom':
                 layout =
                     <CustomInputLayout
-
+                        setStateFromComp={this.props.setStateFromComp}
+                        websiteInputTemplateValue={this.props.websiteInputTemplateValue}
+                        websiteInputsDisabled={this.props.websiteInputsDisabled}
                     />;
                     break;
             default:
@@ -88,6 +90,7 @@ WebsiteModal.propTypes = {
     setWebsiteInputMode: React.PropTypes.func.isRequired,
     setStateFromComp: React.PropTypes.func.isRequired,
     websiteInputAutoValue: React.PropTypes.string.isRequired,
+    websiteInputTemplateValue: React.PropTypes.string.isRequired,
     checkAutoWebsite: React.PropTypes.func.isRequired,
     websiteInputsDisabled: React.PropTypes.bool.isRequired,
 }

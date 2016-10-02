@@ -25,6 +25,8 @@ export default class AutoInputLayout extends Component {
                     value={this.props.websiteInputAutoValue}
                     handleSubmit={this.props.checkAutoWebsite}
                     editable={!this.props.websiteInputsDisabled}
+                    clearButtonMode="while-editing" // IOS ONLY
+                    keyboardType="url" // IOS ONLY
                 />
             </View>
         )
