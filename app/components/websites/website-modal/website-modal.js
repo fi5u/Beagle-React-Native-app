@@ -25,6 +25,7 @@ export default class WebsiteModal extends Component {
                         setStateFromComp={this.props.setStateFromComp}
                         websiteInputTemplateValue={this.props.websiteInputTemplateValue}
                         websiteInputsDisabled={this.props.websiteInputsDisabled}
+                        websiteInputTitleValue={this.props.websiteInputTitleValue}
                     />;
                     break;
             default:
@@ -91,6 +92,7 @@ WebsiteModal.propTypes = {
     setStateFromComp: React.PropTypes.func.isRequired,
     websiteInputUrlValue: React.PropTypes.string.isRequired,
     websiteInputTemplateValue: React.PropTypes.string.isRequired,
+    websiteInputTitleValue: React.PropTypes.string.isRequired,
     checkAutoWebsite: React.PropTypes.func.isRequired,
     websiteInputsDisabled: React.PropTypes.bool.isRequired,
 }

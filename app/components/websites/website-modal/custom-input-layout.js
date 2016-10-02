@@ -26,6 +26,15 @@ export default class CustomInputLayout extends Component {
                     editable={!this.props.websiteInputsDisabled}
                     keyboardType="url" // IOS ONLY
                 />
+
+                <InputText
+                    id="websiteInputTitleValue"
+                    placeholder="Website title"
+                    label="Website title"
+                    setStateFromComp={this.props.setStateFromComp}
+                    value={this.props.websiteInputTitleValue}
+                    editable={!this.props.websiteInputsDisabled}
+                />
             </View>
         )
     }
@@ -34,5 +43,6 @@ export default class CustomInputLayout extends Component {
 CustomInputLayout.propTypes = {
     setStateFromComp: React.PropTypes.func.isRequired,
     websiteInputTemplateValue: React.PropTypes.string.isRequired,
+    websiteInputTitleValue: React.PropTypes.string.isRequired,
     websiteInputsDisabled: React.PropTypes.bool.isRequired,
 }
