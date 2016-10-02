@@ -25,6 +25,7 @@ export default class InputText extends Component {
                     value={this.props.value}
                     editable={this.props.editable}
                     keyboardType={this.props.keyboardType}
+                    autoCapitalize={this.props.keyboardType === 'url' ? 'none' : null}
                 />
             </FormItem>
         )
