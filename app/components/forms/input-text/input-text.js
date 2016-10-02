@@ -14,7 +14,9 @@ export default class InputText extends Component {
 
     render() {
         return (
-            <FormItem>
+            <FormItem
+                label={this.props.label}
+            >
                 <TextInput
                     style={styles.base}
                     placeholder={this.props.placeholder}
@@ -35,4 +37,5 @@ InputText.propTypes = {
     value: React.PropTypes.string.isRequired,
     handleSubmit: React.PropTypes.func.isRequired,
     editable: React.PropTypes.bool.isRequired,
+    label: React.PropTypes.string,
 }

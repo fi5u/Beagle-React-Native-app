@@ -20,6 +20,7 @@ export default class AutoInputLayout extends Component {
                 <InputText
                     id="websiteInputAutoValue"
                     placeholder="Website address"
+                    label="Website address"
                     setStateFromComp={this.props.setStateFromComp}
                     value={this.props.websiteInputAutoValue}
                     handleSubmit={this.props.checkAutoWebsite}

@@ -15,6 +15,9 @@ export default class FormItem extends Component {
             <View
                 style={styles.base}
             >
+                {this.props.label ?
+                    <Text>{this.props.label}</Text>
+                : null}
                 {this.props.children}
             </View>
         )
@@ -23,4 +26,5 @@ export default class FormItem extends Component {
 
 FormItem.propTypes = {
     children: React.PropTypes.node.isRequired,
+    label: React.PropTypes.string,
 }
