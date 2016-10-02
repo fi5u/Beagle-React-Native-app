@@ -18,11 +18,11 @@ export default class AutoInputLayout extends Component {
             >
                 <Text>AUTO</Text>
                 <InputText
-                    id="websiteInputAutoValue"
+                    id="websiteInputUrlValue"
                     placeholder="Website address"
                     label="Website address"
                     setStateFromComp={this.props.setStateFromComp}
-                    value={this.props.websiteInputAutoValue}
+                    value={this.props.websiteInputUrlValue}
                     handleSubmit={this.props.checkAutoWebsite}
                     editable={!this.props.websiteInputsDisabled}
                     clearButtonMode="while-editing" // IOS ONLY
@@ -35,7 +35,7 @@ export default class AutoInputLayout extends Component {
 
 AutoInputLayout.propTypes = {
     setStateFromComp: React.PropTypes.func.isRequired,
-    websiteInputAutoValue: React.PropTypes.string.isRequired,
+    websiteInputUrlValue: React.PropTypes.string.isRequired,
     checkAutoWebsite: React.PropTypes.func.isRequired,
     websiteInputsDisabled: React.PropTypes.bool.isRequired,
 }
