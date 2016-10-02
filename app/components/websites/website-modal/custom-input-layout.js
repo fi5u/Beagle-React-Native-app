@@ -4,6 +4,7 @@ import {
     View
 } from 'react-native'
 import InputText from '../../forms/input-text/input-text'
+import InputPicker from '../../forms/input-picker/input-picker'
 import styles from './website-modal.style'
 
 export default class CustomInputLayout extends Component {
@@ -12,6 +13,14 @@ export default class CustomInputLayout extends Component {
     }
 
     render() {
+        const wordDividers = [{
+            label: '+',
+            value: '+'
+        }, {
+            label: '%20',
+            value: '%20'
+        }];
+
         return (
             <View
                 style={styles.tabContentBase}
@@ -35,6 +44,14 @@ export default class CustomInputLayout extends Component {
                     value={this.props.websiteInputTitleValue}
                     editable={!this.props.websiteInputsDisabled}
                 />
+
+                <InputPicker
+                    id="websiteInputWordDividerValue"
+                    label="Word divider"
+                    values={wordDividers}
+                    selectedValue={this.props.websiteInputWordDividerValue}
+                    setStateFromComp={this.props.setStateFromComp}
+                />
             </View>
         )
     }
@@ -44,5 +61,6 @@ CustomInputLayout.propTypes = {
     setStateFromComp: React.PropTypes.func.isRequired,
     websiteInputTemplateValue: React.PropTypes.string.isRequired,
     websiteInputTitleValue: React.PropTypes.string.isRequired,
+    websiteInputWordDividerValue: React.PropTypes.string.isRequired,
     websiteInputsDisabled: React.PropTypes.bool.isRequired,
 }

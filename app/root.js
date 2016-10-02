@@ -22,6 +22,7 @@ export default class Root extends Component {
             websiteInputUrlValue: '',
             websiteInputTemplateValue: '',
             websiteInputTitleValue: '',
+            websiteInputWordDividerValue: '+',
             websiteInputsDisabled: false,
         };
 
@@ -88,6 +89,7 @@ export default class Root extends Component {
                         setWebsiteInputMode={this.setWebsiteInputMode.bind(this)}
                         websiteInputUrlValue={this.state.websiteInputUrlValue}
                         websiteInputTemplateValue={this.state.websiteInputTemplateValue}
+                        websiteInputWordDividerValue={this.state.websiteInputWordDividerValue}
                         websiteInputTitleValue={this.state.websiteInputTitleValue}
                         checkAutoWebsite={this.checkAutoWebsite.bind(this)}
                         websiteInputsDisabled={this.state.websiteInputsDisabled}
