@@ -16,6 +16,21 @@ export default class WebsiteModal extends Component {
         super(props);
     }
 
+    customIsInvalid() {
+        return (
+            this.props.websiteInputMode === 'custom' &&
+            (!this.props.isInputValid('websiteInputTemplateValue') ||
+            !this.props.isInputValid('websiteInputTitleValue')) || false
+        )
+    }
+
+    autoIsInvalid() {
+        return (
+            this.props.websiteInputMode === 'auto' &&
+            !this.props.isInputValid('websiteInputUrlValue') || false
+        )
+    }
+
     render() {
         let layout;
         switch(this.props.websiteInputMode) {
@@ -23,8 +38,8 @@ export default class WebsiteModal extends Component {
                 layout =
                     <CustomInputLayout
                         setStateFromComp={this.props.setStateFromComp}
-                        websiteInputTemplateValue={this.props.websiteInputTemplateValue}
                         websiteInputsDisabled={this.props.websiteInputsDisabled}
+                        websiteInputTemplateValue={this.props.websiteInputTemplateValue}
                         websiteInputTitleValue={this.props.websiteInputTitleValue}
                         websiteInputWordDividerValue={this.props.websiteInputWordDividerValue}
                     />;
@@ -58,6 +73,7 @@ export default class WebsiteModal extends Component {
                         position: 'primary',
                         title: 'Save',
                         onPress: this.props.saveWebsite,
+                        isDisabled: this.customIsInvalid() || this.autoIsInvalid()
                     }]}
                 />
                 <Tabs
@@ -91,6 +107,7 @@ WebsiteModal.propTypes = {
     websiteInputMode: React.PropTypes.oneOf(['auto', 'custom']).isRequired,
     setWebsiteInputMode: React.PropTypes.func.isRequired,
     setStateFromComp: React.PropTypes.func.isRequired,
+    isInputValid: React.PropTypes.func.isRequired,
     websiteInputUrlValue: React.PropTypes.string.isRequired,
     websiteInputTemplateValue: React.PropTypes.string.isRequired,
     websiteInputTitleValue: React.PropTypes.string.isRequired,

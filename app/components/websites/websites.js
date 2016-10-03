@@ -31,6 +31,7 @@ export default class Websites extends Component {
                     websiteInputMode={this.props.websiteInputMode}
                     setWebsiteInputMode={this.props.setWebsiteInputMode}
                     setStateFromComp={this.props.setStateFromComp}
+                    isInputValid={this.props.isInputValid}
                     websiteInputUrlValue={this.props.websiteInputUrlValue}
                     websiteInputTemplateValue={this.props.websiteInputTemplateValue}
                     websiteInputTitleValue={this.props.websiteInputTitleValue}
@@ -51,6 +52,7 @@ Websites.propTypes = {
     websiteInputMode: React.PropTypes.oneOf(['auto', 'custom']).isRequired,
     setWebsiteInputMode: React.PropTypes.func.isRequired,
     setStateFromComp: React.PropTypes.func.isRequired,
+    isInputValid: React.PropTypes.func.isRequired,
     websiteInputUrlValue: React.PropTypes.string.isRequired,
     websiteInputTemplateValue: React.PropTypes.string.isRequired,
     websiteInputTitleValue: React.PropTypes.string.isRequired,

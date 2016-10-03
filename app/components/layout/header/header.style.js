@@ -14,6 +14,12 @@ const Styles = StyleSheet.create({
         position: 'absolute',
         right: 0,
     },
+    btnText: {
+        color: '#000',
+    },
+    btnTextDisabled: {
+        color: '#aaa',
+    },
     title: {
         flex: 1,
         textAlign: 'center',

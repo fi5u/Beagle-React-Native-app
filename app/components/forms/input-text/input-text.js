@@ -41,4 +41,5 @@ InputText.propTypes = {
     editable: React.PropTypes.bool.isRequired,
     label: React.PropTypes.string,
     keyboardType: React.PropTypes.string,
+    isValid: React.PropTypes.bool,
 }
