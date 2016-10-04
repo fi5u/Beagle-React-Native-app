@@ -42,6 +42,7 @@ export default class WebsiteModal extends Component {
                         websiteInputTemplateValue={this.props.websiteInputTemplateValue}
                         websiteInputTitleValue={this.props.websiteInputTitleValue}
                         websiteInputWordDividerValue={this.props.websiteInputWordDividerValue}
+                        isInputValid={this.props.isInputValid}
                     />;
                     break;
             default:
@@ -51,6 +52,7 @@ export default class WebsiteModal extends Component {
                         websiteInputUrlValue={this.props.websiteInputUrlValue}
                         checkAutoWebsite={this.props.checkAutoWebsite}
                         websiteInputsDisabled={this.props.websiteInputsDisabled}
+                        isInputValid={this.props.isInputValid}
                     />;
         }
 

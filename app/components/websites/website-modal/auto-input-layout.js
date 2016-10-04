@@ -27,6 +27,7 @@ export default class AutoInputLayout extends Component {
                     editable={!this.props.websiteInputsDisabled}
                     clearButtonMode="while-editing" // IOS ONLY
                     keyboardType="url" // IOS ONLY
+                    isValid={this.props.isInputValid('websiteInputUrlValue')}
                 />
             </View>
         )
@@ -38,4 +39,5 @@ AutoInputLayout.propTypes = {
     websiteInputUrlValue: React.PropTypes.string.isRequired,
     checkAutoWebsite: React.PropTypes.func.isRequired,
     websiteInputsDisabled: React.PropTypes.bool.isRequired,
+    isInputValid: React.PropTypes.func.isRequired,
 }
