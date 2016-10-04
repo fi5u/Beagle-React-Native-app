@@ -16,7 +16,15 @@ export default class Root extends Component {
             activeMenuItem: 'websites',
 
             // Websites
-            websites: [],
+            websites: [{
+                url: '',
+                template: 'abc.com/[?]',
+                title: 'Abc site',
+                divider: '+',
+                dateCreated: '2016-10-01 16:00 +0200',
+                dateModified: '',
+                searchStrings: ['hello', 'goodbye']
+            }],
             websiteModalIsVisible: false,
             websiteInputMode: 'auto',
             websiteInputUrlValue: '',
@@ -96,6 +104,7 @@ export default class Root extends Component {
                 activePage =
                     <Websites
                         setStateFromComp={this.setStateFromComp.bind(this)}
+                        websites={this.state.websites}
                         handleStartAddWebsite={this.handleStartAddWebsite.bind(this)}
                         websiteModalIsVisible={this.state.websiteModalIsVisible}
                         hideWebsiteModal={this.handleHideWebsiteModal.bind(this)}

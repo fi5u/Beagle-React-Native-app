@@ -39,6 +39,8 @@ export default class Websites extends Component {
                     checkAutoWebsite={this.props.checkAutoWebsite}
                     websiteInputsDisabled={this.props.websiteInputsDisabled}
                 />
+
+
             </Screen>
         )
     }
@@ -46,6 +48,19 @@ export default class Websites extends Component {
 
 Websites.propTypes = {
     handleStartAddWebsite: React.PropTypes.func.isRequired,
+    websites: React.PropTypes.arrayOf(
+        React.PropTypes.shape({
+            url: React.PropTypes.string,
+            template: React.PropTypes.string,
+            title: React.PropTypes.string,
+            divider: React.PropTypes.string,
+            dateCreated: React.PropTypes.string,
+            dateModified: React.PropTypes.string,
+            searchStrings: React.PropTypes.arrayOf(
+                React.PropTypes.string
+            ),
+        })
+    ).isRequired,
     websiteModalIsVisible: React.PropTypes.bool.isRequired,
     hideWebsiteModal: React.PropTypes.func.isRequired,
     websiteModalClosed: React.PropTypes.func.isRequired,
