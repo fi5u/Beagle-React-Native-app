@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+    ListView,
     View
 } from 'react-native'
 import Drawer from 'react-native-drawer'
@@ -11,12 +12,15 @@ import styles from './root.style'
 export default class Root extends Component {
     constructor(props) {
         super(props);
+
+        const dataStore = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
         this.state = {
             // Menu
             activeMenuItem: 'websites',
 
             // Websites
-            websites: [{
+            websites: dataStore.cloneWithRows([{
                 url: '',
                 template: 'abc.com/[?]',
                 title: 'Abc site',
@@ -24,7 +28,7 @@ export default class Root extends Component {
                 dateCreated: '2016-10-01 16:00 +0200',
                 dateModified: '',
                 searchStrings: ['hello', 'goodbye']
-            }],
+            }]),
             websiteModalIsVisible: false,
             websiteInputMode: 'auto',
             websiteInputUrlValue: '',

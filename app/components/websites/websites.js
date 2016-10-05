@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+    ListView,
     Text
 } from 'react-native'
 import Screen from '../layout/screen/screen'
@@ -9,6 +10,7 @@ import WebsiteModal from './website-modal/website-modal'
 export default class Websites extends Component {
     constructor(props) {
         super(props);
+
     }
 
     render() {
@@ -23,6 +25,12 @@ export default class Websites extends Component {
                 }]}
             >
                 <Text>WEBSITES</Text>
+
+                <ListView
+                    dataSource={this.props.websites}
+                    renderRow={(rowData) => <Text>{rowData.title}</Text>}
+                />
+
                 <WebsiteModal
                     websiteModalIsVisible={this.props.websiteModalIsVisible}
                     hideModal={this.props.hideWebsiteModal}
@@ -39,8 +47,6 @@ export default class Websites extends Component {
                     checkAutoWebsite={this.props.checkAutoWebsite}
                     websiteInputsDisabled={this.props.websiteInputsDisabled}
                 />
-
-
             </Screen>
         )
     }
@@ -48,8 +54,8 @@ export default class Websites extends Component {
 
 Websites.propTypes = {
     handleStartAddWebsite: React.PropTypes.func.isRequired,
-    websites: React.PropTypes.arrayOf(
-        React.PropTypes.shape({
+    websites: React.PropTypes.object.isRequired,
+        /*React.PropTypes.shape({
             url: React.PropTypes.string,
             template: React.PropTypes.string,
             title: React.PropTypes.string,
@@ -59,8 +65,8 @@ Websites.propTypes = {
             searchStrings: React.PropTypes.arrayOf(
                 React.PropTypes.string
             ),
-        })
-    ).isRequired,
+        })*/
+    /*).isRequired,*/
     websiteModalIsVisible: React.PropTypes.bool.isRequired,
     hideWebsiteModal: React.PropTypes.func.isRequired,
     websiteModalClosed: React.PropTypes.func.isRequired,
