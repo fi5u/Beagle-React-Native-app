@@ -15,7 +15,7 @@ export default class Root extends Component {
 
         const dataStore = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-        this.state = {
+        this._state = {
             // Menu
             activeMenuItem: 'websites',
 
@@ -85,14 +85,14 @@ export default class Root extends Component {
     isInputValid(id) {
         switch(id) {
             case 'websiteInputUrlValue':
-                return this.state.websiteInputUrlValue.length > 3 || false;
+                return this._state.websiteInputUrlValue.length > 3 || false;
                 break;
             case 'websiteInputTemplateValue':
                 // matches [?] or [?:1] [?:2] etc
-                return /(?:\[\?\])|(?:\[\?:\d+\])/g.test(this.state.websiteInputTemplateValue) || false;
+                return /(?:\[\?\])|(?:\[\?:\d+\])/g.test(this._state.websiteInputTemplateValue) || false;
                 break;
             case 'websiteInputTitleValue':
-                return this.state.websiteInputTitleValue.length > 0 || false;
+                return this._state.websiteInputTitleValue.length > 0 || false;
             default:
                 return false;
         }
@@ -100,7 +100,7 @@ export default class Root extends Component {
 
     render() {
         let activePage;
-        switch(this.state.activeMenuItem) {
+        switch(this._state.activeMenuItem) {
             case 'settings':
                 activePage = <Settings />;
                 break;
@@ -108,21 +108,21 @@ export default class Root extends Component {
                 activePage =
                     <Websites
                         setStateFromComp={this.setStateFromComp.bind(this)}
-                        websites={this.state.websites}
+                        websites={this._state.websites}
                         handleStartAddWebsite={this.handleStartAddWebsite.bind(this)}
-                        websiteModalIsVisible={this.state.websiteModalIsVisible}
+                        websiteModalIsVisible={this._state.websiteModalIsVisible}
                         hideWebsiteModal={this.handleHideWebsiteModal.bind(this)}
                         saveWebsite={this.handleSaveWebsite.bind(this)}
                         websiteModalClosed={this.handleWebsiteModalClose.bind(this)}
-                        websiteInputMode={this.state.websiteInputMode}
+                        websiteInputMode={this._state.websiteInputMode}
                         setWebsiteInputMode={this.setWebsiteInputMode.bind(this)}
                         isInputValid={this.isInputValid.bind(this)}
-                        websiteInputUrlValue={this.state.websiteInputUrlValue}
-                        websiteInputTemplateValue={this.state.websiteInputTemplateValue}
-                        websiteInputWordDividerValue={this.state.websiteInputWordDividerValue}
-                        websiteInputTitleValue={this.state.websiteInputTitleValue}
+                        websiteInputUrlValue={this._state.websiteInputUrlValue}
+                        websiteInputTemplateValue={this._state.websiteInputTemplateValue}
+                        websiteInputWordDividerValue={this._state.websiteInputWordDividerValue}
+                        websiteInputTitleValue={this._state.websiteInputTitleValue}
                         checkAutoWebsite={this.checkAutoWebsite.bind(this)}
-                        websiteInputsDisabled={this.state.websiteInputsDisabled}
+                        websiteInputsDisabled={this._state.websiteInputsDisabled}
                     />;
         }
 
