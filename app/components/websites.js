@@ -24,12 +24,12 @@ export default class Websites extends Component {
     }
 
     render() {
-        const { websites, addNewWebsite, removeWebsite } = this.props;
-        const titles = websites.map((website) => {
+        //const { websites, addNewWebsite, removeWebsite } = this.props;
+        const titles = this.props.websites.map((website) => {
             return(
                 <TouchableOpacity
                     key={website.id}
-                    onPress={() => removeWebsite(website.id)}
+                    onPress={() => this.props.removeWebsite(website.id)}
                     style={styles.button}
                 >
                     <Text>{website.title} + {website.id}</Text>
@@ -41,8 +41,9 @@ export default class Websites extends Component {
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 
                 <Text>[{titles}]</Text>
+                <Text>{this.props.activeMenuItem}</Text>
 
-                <TouchableOpacity onPress={addNewWebsite} style={styles.button}>
+                <TouchableOpacity onPress={this.props.addNewWebsite} style={styles.button}>
                     <Text>Add new website</Text>
                 </TouchableOpacity>
             </View>

@@ -10,7 +10,6 @@ import WebsiteModal from './website-modal/website-modal'
 export default class Websites extends Component {
     constructor(props) {
         super(props);
-
     }
 
     render() {

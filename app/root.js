@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import * as reducers from './reducers'
 import {
-    ListView,
     View
 } from 'react-native'
 import Drawer from 'react-native-drawer'
@@ -26,14 +25,14 @@ export default class Root extends Component {
     constructor(props) {
         super(props);
 
-        const dataStore = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        //const dataStore = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
         this.state = {
             // Menu
             activeMenuItem: 'websites',
 
             // Websites
-            websites: dataStore.cloneWithRows([{
+            /*websites: dataStore.cloneWithRows([{
                 url: '',
                 template: 'abc.com/[?]',
                 title: 'Abc site',
@@ -41,7 +40,7 @@ export default class Root extends Component {
                 dateCreated: '2016-10-01 16:00 +0200',
                 dateModified: '',
                 searchStrings: ['hello', 'goodbye']
-            }]),
+            }]),*/
             websiteModalIsVisible: false,
             websiteInputMode: 'auto',
             websiteInputUrlValue: '',
@@ -119,9 +118,8 @@ export default class Root extends Component {
                 break;
             default:
                 activePage =
-                    <Websites
+                    <WebsitesContainer
                         setStateFromComp={this.setStateFromComp.bind(this)}
-                        websites={this.state.websites}
                         handleStartAddWebsite={this.handleStartAddWebsite.bind(this)}
                         websiteModalIsVisible={this.state.websiteModalIsVisible}
                         hideWebsiteModal={this.handleHideWebsiteModal.bind(this)}
@@ -156,9 +154,6 @@ export default class Root extends Component {
                     <View
                         style={styles.base}
                     >
-
-                        <WebsitesContainer />
-
                         {activePage}
                     </View>
                 </Drawer>

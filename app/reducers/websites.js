@@ -4,7 +4,7 @@ import * as types from '../actions/action-types'
 const initialState = {
     websites: [{
         id: 0,
-        title: 'The first ABC title'
+        title: 'The first ABCD title'
     }]
 };
 
