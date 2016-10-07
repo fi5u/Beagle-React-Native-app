@@ -1,5 +1,5 @@
-import counter from './counter';
+import websites from './websites'
 
 export {
-    counter
-};
+    websites
+}

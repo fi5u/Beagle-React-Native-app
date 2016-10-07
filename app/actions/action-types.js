@@ -1,2 +1,2 @@
-export const INCREMENT = 'INCREMENT';
-export const DECREMENT = 'DECREMENT';
+export const ADD_NEW_WEBSITE = 'ADD_NEW_WEBSITE';
+export const REMOVE_WEBSITE = 'REMOVE_WEBSITE';

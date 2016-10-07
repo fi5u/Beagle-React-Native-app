@@ -12,7 +12,7 @@ import Menu from './components/menu/menu'
 import Websites from './components/websites/websites'
 import Settings from './components/settings/settings'
 
-import CounterApp from './containers/counter-app'
+import WebsitesContainer from './containers/websites'
 
 import styles from './root.style'
 
@@ -28,7 +28,7 @@ export default class Root extends Component {
 
         const dataStore = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-        this._state = {
+        this.state = {
             // Menu
             activeMenuItem: 'websites',
 
@@ -98,14 +98,14 @@ export default class Root extends Component {
     isInputValid(id) {
         switch(id) {
             case 'websiteInputUrlValue':
-                return this._state.websiteInputUrlValue.length > 3 || false;
+                return this.state.websiteInputUrlValue.length > 3 || false;
                 break;
             case 'websiteInputTemplateValue':
                 // matches [?] or [?:1] [?:2] etc
-                return /(?:\[\?\])|(?:\[\?:\d+\])/g.test(this._state.websiteInputTemplateValue) || false;
+                return /(?:\[\?\])|(?:\[\?:\d+\])/g.test(this.state.websiteInputTemplateValue) || false;
                 break;
             case 'websiteInputTitleValue':
-                return this._state.websiteInputTitleValue.length > 0 || false;
+                return this.state.websiteInputTitleValue.length > 0 || false;
             default:
                 return false;
         }
@@ -113,7 +113,7 @@ export default class Root extends Component {
 
     render() {
         let activePage;
-        switch(this._state.activeMenuItem) {
+        switch(this.state.activeMenuItem) {
             case 'settings':
                 activePage = <Settings />;
                 break;
@@ -121,21 +121,21 @@ export default class Root extends Component {
                 activePage =
                     <Websites
                         setStateFromComp={this.setStateFromComp.bind(this)}
-                        websites={this._state.websites}
+                        websites={this.state.websites}
                         handleStartAddWebsite={this.handleStartAddWebsite.bind(this)}
-                        websiteModalIsVisible={this._state.websiteModalIsVisible}
+                        websiteModalIsVisible={this.state.websiteModalIsVisible}
                         hideWebsiteModal={this.handleHideWebsiteModal.bind(this)}
                         saveWebsite={this.handleSaveWebsite.bind(this)}
                         websiteModalClosed={this.handleWebsiteModalClose.bind(this)}
-                        websiteInputMode={this._state.websiteInputMode}
+                        websiteInputMode={this.state.websiteInputMode}
                         setWebsiteInputMode={this.setWebsiteInputMode.bind(this)}
                         isInputValid={this.isInputValid.bind(this)}
-                        websiteInputUrlValue={this._state.websiteInputUrlValue}
-                        websiteInputTemplateValue={this._state.websiteInputTemplateValue}
-                        websiteInputWordDividerValue={this._state.websiteInputWordDividerValue}
-                        websiteInputTitleValue={this._state.websiteInputTitleValue}
+                        websiteInputUrlValue={this.state.websiteInputUrlValue}
+                        websiteInputTemplateValue={this.state.websiteInputTemplateValue}
+                        websiteInputWordDividerValue={this.state.websiteInputWordDividerValue}
+                        websiteInputTitleValue={this.state.websiteInputTitleValue}
                         checkAutoWebsite={this.checkAutoWebsite.bind(this)}
-                        websiteInputsDisabled={this._state.websiteInputsDisabled}
+                        websiteInputsDisabled={this.state.websiteInputsDisabled}
                     />;
         }
 
@@ -157,7 +157,7 @@ export default class Root extends Component {
                         style={styles.base}
                     >
 
-                        <CounterApp />
+                        <WebsitesContainer />
 
                         {activePage}
                     </View>
