@@ -17,10 +17,9 @@ export default class Websites extends Component {
             <Screen
                 title="Websites"
                 buttons={[{
-                    id: 'add',
                     position: 'primary',
                     title: 'Add',
-                    onPress: this.props.handleStartAddWebsite
+                    onPress: this.props.showWebsiteEditModal
                 }]}
             >
                 <Text>WEBSITES</Text>
@@ -28,23 +27,16 @@ export default class Websites extends Component {
                 <ListView
                     dataSource={this.props.websites}
                     renderRow={(rowData) => <Text>{rowData.title}</Text>}
+                    enableEmptySections={true}
                 />
 
                 <WebsiteModal
-                    websiteModalIsVisible={this.props.websiteModalIsVisible}
-                    hideModal={this.props.hideWebsiteModal}
-                    saveWebsite={this.props.saveWebsite}
-                    modalClosed={this.props.websiteModalClosed}
-                    websiteInputMode={this.props.websiteInputMode}
-                    setWebsiteInputMode={this.props.setWebsiteInputMode}
-                    setStateFromComp={this.props.setStateFromComp}
-                    isInputValid={this.props.isInputValid}
-                    websiteInputUrlValue={this.props.websiteInputUrlValue}
-                    websiteInputTemplateValue={this.props.websiteInputTemplateValue}
-                    websiteInputTitleValue={this.props.websiteInputTitleValue}
-                    websiteInputWordDividerValue={this.props.websiteInputWordDividerValue}
-                    checkAutoWebsite={this.props.checkAutoWebsite}
-                    websiteInputsDisabled={this.props.websiteInputsDisabled}
+                    hideWebsiteEditModal={this.props.hideWebsiteEditModal}
+                    updateWebsiteModalValue={this.props.updateWebsiteModalValue}
+                    setModalInputMode={this.props.setModalInputMode}
+                    editModal={this.props.editModal}
+                    checkAutoUrl={this.props.checkAutoUrl}
+                    addNewWebsite={this.props.addNewWebsite}
                 />
             </Screen>
         )
@@ -52,31 +44,15 @@ export default class Websites extends Component {
 }
 
 Websites.propTypes = {
-    handleStartAddWebsite: React.PropTypes.func.isRequired,
+    // actions
+    showWebsiteEditModal: React.PropTypes.func.isRequired,
+    hideWebsiteEditModal: React.PropTypes.func.isRequired,
+    updateWebsiteModalValue: React.PropTypes.func.isRequired,
+    setModalInputMode: React.PropTypes.func.isRequired,
+    checkAutoUrl: React.PropTypes.func.isRequired,
+    addNewWebsite: React.PropTypes.func.isRequired,
+
+    // values
     websites: React.PropTypes.object.isRequired,
-        /*React.PropTypes.shape({
-            url: React.PropTypes.string,
-            template: React.PropTypes.string,
-            title: React.PropTypes.string,
-            divider: React.PropTypes.string,
-            dateCreated: React.PropTypes.string,
-            dateModified: React.PropTypes.string,
-            searchStrings: React.PropTypes.arrayOf(
-                React.PropTypes.string
-            ),
-        })*/
-    /*).isRequired,*/
-    websiteModalIsVisible: React.PropTypes.bool.isRequired,
-    hideWebsiteModal: React.PropTypes.func.isRequired,
-    websiteModalClosed: React.PropTypes.func.isRequired,
-    websiteInputMode: React.PropTypes.oneOf(['auto', 'custom']).isRequired,
-    setWebsiteInputMode: React.PropTypes.func.isRequired,
-    setStateFromComp: React.PropTypes.func.isRequired,
-    isInputValid: React.PropTypes.func.isRequired,
-    websiteInputUrlValue: React.PropTypes.string.isRequired,
-    websiteInputTemplateValue: React.PropTypes.string.isRequired,
-    websiteInputTitleValue: React.PropTypes.string.isRequired,
-    websiteInputWordDividerValue: React.PropTypes.string.isRequired,
-    checkAutoWebsite: React.PropTypes.func.isRequired,
-    websiteInputsDisabled: React.PropTypes.bool.isRequired,
+    editModal: React.PropTypes.object.isRequired,
 }

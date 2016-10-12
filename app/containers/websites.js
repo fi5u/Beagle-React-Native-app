@@ -18,9 +18,16 @@ class WebsitesContainer extends Component {
         const websites = dataStore.cloneWithRows(state.websites);
         return (
             <Websites
+                // actions
+                showWebsiteEditModal={actions.showWebsiteEditModal}
+                hideWebsiteEditModal={actions.hideWebsiteEditModal}
+                updateWebsiteModalValue={actions.updateWebsiteModalValue}
+                setModalInputMode={actions.setModalInputMode}
+                checkAutoUrl={actions.checkAutoUrl}
+                addNewWebsite={actions.addNewWebsite}
+                // values
                 websites={websites}
-                {...actions}
-                {...this.props}
+                editModal={state.editModal}
             />
         );
     }

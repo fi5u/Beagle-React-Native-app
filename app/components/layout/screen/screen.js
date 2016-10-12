@@ -36,7 +36,6 @@ Screen.propTypes = {
     title: React.PropTypes.string,
     buttons: React.PropTypes.arrayOf(
         React.PropTypes.shape({
-            id: React.PropTypes.string,
             position: React.PropTypes.oneOf(['primary', 'secondary']),
             title: React.PropTypes.string,
             onPress: React.PropTypes.func,

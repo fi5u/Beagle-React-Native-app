@@ -19,7 +19,7 @@ export default class InputPicker extends Component {
             >
                 <Picker
                     selectedValue={this.props.selectedValue}
-                    onValueChange={(newValue) => this.props.setStateFromComp(this.props.id, newValue)}
+                    onValueChange={(newValue) => this.props.onChange(this.props.id, newValue)}
                 >
                     {this.props.values.map(({label, value}) => {
                         return(
@@ -42,5 +42,4 @@ InputPicker.propTypes = {
         })
     ).isRequired,
     selectedValue: React.PropTypes.string.isRequired,
-    setStateFromComp: React.PropTypes.func.isRequired,
 }

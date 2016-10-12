@@ -6,6 +6,7 @@ import {
     View
 } from 'react-native'
 import Tabs from 'react-native-tabs'
+import validate from '../../../services/validation'
 import Header from '../../layout/header/header'
 import AutoInputLayout from './auto-input-layout'
 import CustomInputLayout from './custom-input-layout'
@@ -16,71 +17,67 @@ export default class WebsiteModal extends Component {
         super(props);
     }
 
-    customIsInvalid() {
-        return (
-            this.props.websiteInputMode === 'custom' &&
-            (!this.props.isInputValid('websiteInputTemplateValue') ||
-            !this.props.isInputValid('websiteInputTitleValue')) || false
-        )
-    }
-
-    autoIsInvalid() {
-        return (
-            this.props.websiteInputMode === 'auto' &&
-            !this.props.isInputValid('websiteInputUrlValue') || false
-        )
+    isFormValid() {
+        if(this.props.editModal.mode === 'auto') {
+            return validate(this.props.editModal.values.url, ['min-length', 4])
+        }
+        if(this.props.editModal.mode === 'custom') {
+            return (
+                validate(this.props.editModal.values.template, 'template') &&
+                validate(this.props.editModal.values.title, ['min-length', 1])
+            )
+        }
     }
 
     render() {
         let layout;
-        switch(this.props.websiteInputMode) {
+        switch(this.props.editModal.mode) {
             case 'custom':
                 layout =
                     <CustomInputLayout
-                        setStateFromComp={this.props.setStateFromComp}
-                        websiteInputsDisabled={this.props.websiteInputsDisabled}
-                        websiteInputTemplateValue={this.props.websiteInputTemplateValue}
-                        websiteInputTitleValue={this.props.websiteInputTitleValue}
-                        websiteInputWordDividerValue={this.props.websiteInputWordDividerValue}
-                        isInputValid={this.props.isInputValid}
+                        updateWebsiteModalValue={this.props.updateWebsiteModalValue}
+                        editModalValues={this.props.editModal.values}
+                        isFrozen={this.props.editModal.isFrozen}
                     />;
                     break;
             default:
                 layout =
                     <AutoInputLayout
-                        setStateFromComp={this.props.setStateFromComp}
-                        websiteInputUrlValue={this.props.websiteInputUrlValue}
-                        checkAutoWebsite={this.props.checkAutoWebsite}
-                        websiteInputsDisabled={this.props.websiteInputsDisabled}
-                        isInputValid={this.props.isInputValid}
+                        editModalValues={this.props.editModal.values}
+                        updateWebsiteModalValue={this.props.updateWebsiteModalValue}
+                        checkAutoUrl={this.props.checkAutoUrl}
+                        isFrozen={this.props.editModal.isFrozen}
                     />;
+        }
+
+        const headerButtons = [{
+            position: 'secondary',
+            title: 'Close',
+            onPress: this.props.hideWebsiteEditModal,
+        }, {
+            position: 'primary',
+            title: 'Save',
+            onPress: () => this.props.addNewWebsite(this.props.editModal.values),
+            isValid: this.isFormValid(),
+        }];
+
+        if(this.props.editModal.mode === 'auto') {
+            headerButtons[1].onPress = () => this.props.checkAutoUrl(this.props.editModal.values.url);
         }
 
         return (
             <Modal
                 animationType={'slide'}
                 transparent={false}
-                visible={this.props.websiteModalIsVisible}
-                onRequestClose={this.props.modalClosed}
+                visible={this.props.editModal.isShowing}
             >
                 <Header
                     title="Add a website"
-                    buttons={[{
-                        id: 'closeWebsiteModal',
-                        position: 'secondary',
-                        title: 'Close',
-                        onPress: this.props.hideModal,
-                    }, {
-                        id: 'saveWebsite',
-                        position: 'primary',
-                        title: 'Save',
-                        onPress: this.props.saveWebsite,
-                        isDisabled: this.customIsInvalid() || this.autoIsInvalid()
-                    }]}
+                    buttons={headerButtons}
                 />
                 <Tabs
                     selected={this.props.websiteInputMode}
-                    onSelect={el => this.props.setWebsiteInputMode(el.props.id)}
+                    onSelect={el => this.props.setModalInputMode(el.props.id)}
                 >
                     <Text
                         id="auto"
@@ -102,18 +99,23 @@ export default class WebsiteModal extends Component {
 }
 
 WebsiteModal.propTypes = {
-    websiteModalIsVisible: React.PropTypes.bool.isRequired,
-    hideModal: React.PropTypes.func.isRequired,
-    saveWebsite: React.PropTypes.func.isRequired,
-    modalClosed: React.PropTypes.func.isRequired,
-    websiteInputMode: React.PropTypes.oneOf(['auto', 'custom']).isRequired,
-    setWebsiteInputMode: React.PropTypes.func.isRequired,
-    setStateFromComp: React.PropTypes.func.isRequired,
-    isInputValid: React.PropTypes.func.isRequired,
-    websiteInputUrlValue: React.PropTypes.string.isRequired,
-    websiteInputTemplateValue: React.PropTypes.string.isRequired,
-    websiteInputTitleValue: React.PropTypes.string.isRequired,
-    websiteInputWordDividerValue: React.PropTypes.string.isRequired,
-    checkAutoWebsite: React.PropTypes.func.isRequired,
-    websiteInputsDisabled: React.PropTypes.bool.isRequired,
+    // actions
+    hideWebsiteEditModal: React.PropTypes.func.isRequired,
+    updateWebsiteModalValue: React.PropTypes.func.isRequired,
+    setModalInputMode: React.PropTypes.func.isRequired,
+    checkAutoUrl: React.PropTypes.func.isRequired,
+    addNewWebsite: React.PropTypes.func.isRequired,
+
+    // values
+    editModal: React.PropTypes.shape({
+        isShowing: React.PropTypes.bool.isRequired,
+        isFrozen: React.PropTypes.bool.isRequired,
+        mode: React.PropTypes.oneOf(['auto', 'custom']).isRequired,
+        values: React.PropTypes.shape({
+            url: React.PropTypes.string,
+            template: React.PropTypes.string,
+            title: React.PropTypes.string,
+            divider: React.PropTypes.string,
+        }).isRequired,
+    }).isRequired,
 }

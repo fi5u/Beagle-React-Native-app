@@ -27,32 +27,30 @@ export default class CustomInputLayout extends Component {
             >
                 <Text>CUSTOM</Text>
                 <InputText
-                    id="websiteInputTemplateValue"
+                    id="template"
                     placeholder="www.website.com/[?]"
                     label="Website template"
-                    setStateFromComp={this.props.setStateFromComp}
-                    value={this.props.websiteInputTemplateValue}
-                    editable={!this.props.websiteInputsDisabled}
+                    onChange={this.props.updateWebsiteModalValue}
+                    value={this.props.editModalValues.template}
+                    editable={!this.props.isFrozen}
                     keyboardType="url" // IOS ONLY
-                    isValid={this.props.isInputValid('websiteInputTemplateValue')}
                 />
 
                 <InputText
-                    id="websiteInputTitleValue"
+                    id="title"
                     placeholder="Website title"
                     label="Website title"
-                    setStateFromComp={this.props.setStateFromComp}
-                    value={this.props.websiteInputTitleValue}
-                    editable={!this.props.websiteInputsDisabled}
-                    isValid={this.props.isInputValid('websiteInputTitleValue')}
+                    onChange={this.props.updateWebsiteModalValue}
+                    value={this.props.editModalValues.title}
+                    editable={!this.props.isFrozen}
                 />
 
                 <InputPicker
-                    id="websiteInputWordDividerValue"
+                    id="divider"
                     label="Word divider"
                     values={wordDividers}
-                    selectedValue={this.props.websiteInputWordDividerValue}
-                    setStateFromComp={this.props.setStateFromComp}
+                    selectedValue={this.props.editModalValues.divider}
+                    onChange={this.props.updateWebsiteModalValue}
                 />
             </View>
         )
@@ -60,10 +58,15 @@ export default class CustomInputLayout extends Component {
 }
 
 CustomInputLayout.propTypes = {
-    setStateFromComp: React.PropTypes.func.isRequired,
-    websiteInputTemplateValue: React.PropTypes.string.isRequired,
-    websiteInputTitleValue: React.PropTypes.string.isRequired,
-    websiteInputWordDividerValue: React.PropTypes.string.isRequired,
-    websiteInputsDisabled: React.PropTypes.bool.isRequired,
-    isInputValid: React.PropTypes.func.isRequired,
+    // actions
+    updateWebsiteModalValue: React.PropTypes.func.isRequired,
+
+    // values
+    editModalValues: React.PropTypes.shape({
+        url: React.PropTypes.string.isRequired,
+        template: React.PropTypes.string.isRequired,
+        title: React.PropTypes.string.isRequired,
+        divider: React.PropTypes.string.isRequired,
+    }).isRequired,
+    isFrozen: React.PropTypes.bool.isRequired,
 }

@@ -16,12 +16,12 @@ export default class Header extends Component {
             return;
         }
 
-        let textStyle = button.isDisabled ? styles.btnTextDisabled : styles.btnText;
+        let textStyle = button.isValid === false ? styles.btnTextDisabled : styles.btnText;
 
         return(
             <TouchableOpacity
-                key={button.id}
-                onPress={() => button.onPress(button.id)}
+                key={button.title}
+                onPress={button.onPress}
             >
                 <Text
                     style={textStyle}
@@ -77,11 +77,10 @@ Header.propTypes = {
     title: React.PropTypes.string.isRequired,
     buttons: React.PropTypes.arrayOf(
         React.PropTypes.shape({
-            id: React.PropTypes.string,
             position: React.PropTypes.oneOf(['primary', 'secondary']),
             title: React.PropTypes.string,
             onPress: React.PropTypes.func,
-            isDisabled: React.PropTypes.bool,
+            isValid: React.PropTypes.bool,
         })
     ),
 }
