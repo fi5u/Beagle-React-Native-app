@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import {
     ListView,
-    Text
+    Text,
+    View
 } from 'react-native'
+import Swipeout from 'react-native-swipeout'
 import Screen from '../layout/screen/screen'
 import styles from './websites.style'
 import WebsiteModal from './website-modal/website-modal'
@@ -10,6 +12,20 @@ import WebsiteModal from './website-modal/website-modal'
 export default class Websites extends Component {
     constructor(props) {
         super(props);
+    }
+
+    renderRow(item) {
+        const swipeoutBtns = [{
+            text: 'Button'
+        }]
+
+        return(
+            <Swipeout right={swipeoutBtns}>
+                <View>
+                    <Text>{item.title}</Text>
+                </View>
+            </Swipeout>
+        );
     }
 
     render() {
@@ -26,7 +42,7 @@ export default class Websites extends Component {
 
                 <ListView
                     dataSource={this.props.websites}
-                    renderRow={(rowData) => <Text>{rowData.title}</Text>}
+                    renderRow={this.renderRow}
                     enableEmptySections={true}
                 />
 
