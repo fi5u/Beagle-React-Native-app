@@ -54,5 +54,6 @@ Websites.propTypes = {
 
     // values
     websites: React.PropTypes.object.isRequired,
+    settings: React.PropTypes.object.isRequired,
     editModal: React.PropTypes.object.isRequired,
 }

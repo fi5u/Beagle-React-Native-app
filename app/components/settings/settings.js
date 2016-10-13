@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {
     Text,
+    TouchableOpacity,
     View
 } from 'react-native'
 import Screen from '../layout/screen/screen'

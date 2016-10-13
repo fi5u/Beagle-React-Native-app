@@ -5,6 +5,7 @@ import {
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as websitesActions from '../actions/websites'
+import * as settingsActions from '../actions/settings'
 import Websites from '../components/websites/websites'
 
 class WebsitesContainer extends Component {
@@ -16,6 +17,7 @@ class WebsitesContainer extends Component {
         const { state, actions } = this.props;
         const dataStore = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         const websites = dataStore.cloneWithRows(state.websites);
+        const settings = state.settings;
         return (
             <Websites
                 // actions
@@ -27,6 +29,7 @@ class WebsitesContainer extends Component {
                 addNewWebsite={actions.addNewWebsite}
                 // values
                 websites={websites}
+                settings={settings}
                 editModal={state.editModal}
             />
         );
@@ -34,8 +37,8 @@ class WebsitesContainer extends Component {
 }
 
 export default connect(state => ({
-        state: state.websites
+        state: {...state.websites,...state.settings}
     }), (dispatch) => ({
-        actions: bindActionCreators(websitesActions, dispatch)
+        actions: bindActionCreators({...websitesActions,...settingsActions}, dispatch)
     })
 )(WebsitesContainer);

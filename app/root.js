@@ -9,7 +9,7 @@ import {
 import Drawer from 'react-native-drawer'
 import Menu from './components/menu/menu'
 import Websites from './components/websites/websites'
-import Settings from './components/settings/settings'
+import SettingsContainer from './containers/settings'
 import WebsitesContainer from './containers/websites'
 import styles from './root.style'
 
@@ -37,7 +37,7 @@ export default class Root extends Component {
         switch(this.state.activeMenuItem) {
             case 'settings':
                 activePage =
-                    <Settings />;
+                    <SettingsContainer />;
                 break;
             default:
                 activePage =
