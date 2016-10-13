@@ -22,6 +22,7 @@ export default class Header extends Component {
             <TouchableOpacity
                 key={button.title}
                 onPress={button.onPress}
+                disabled={button.isValid === false}
             >
                 <Text
                     style={textStyle}
