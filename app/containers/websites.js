@@ -27,6 +27,8 @@ class WebsitesContainer extends Component {
                 setModalInputMode={actions.setModalInputMode}
                 checkAutoUrl={actions.checkAutoUrl}
                 addNewWebsite={actions.addNewWebsite}
+                updateWebsite={actions.updateWebsite}
+                editWebsite={actions.editWebsite}
                 // values
                 websites={websites}
                 settings={settings}

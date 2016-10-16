@@ -2,12 +2,28 @@ import _ from 'lodash'
 import * as types from '../actions/action-types'
 
 const initialState = {
-    websites: [],
+    websites: [{
+        id: 0,
+        template: 'http://abc/[?]',
+        title: 'Abc',
+        divider: '+',
+    }, {
+        id: 1,
+        template: 'http://def/[?]',
+        title: 'Def',
+        divider: '+',
+    }, {
+        id: 2,
+        template: 'http://hij/[?]',
+        title: 'Hij',
+        divider: '+',
+    }],
     editModal: {
         isShowing: false,
         isFrozen: false,
         mode: 'auto',
         values: {
+            id: null,
             url: '',
             template: '',
             title: '',
@@ -19,14 +35,14 @@ const initialState = {
 export default function websites(state = initialState, action = {}) {
     switch(action.type) {
         case types.ADD_NEW_WEBSITE:
-            const { payload: { website } } = action;
+            const { payload: { websiteNew } } = action;
             // Increment the previous id or set to 0
-            const newID = state.websites.length ? state.websites[state.websites.length - 1].id + 1 : 0;
+            const websiteID = state.websites.length ? state.websites[state.websites.length - 1].id + 1 : 0;
             return {
                 ...state,
                 websites: [...state.websites, {
-                    id: newID,
-                    ...website
+                    id: websiteID,
+                    ...websiteNew
                 }],
                 editModal: {
                     ...state.editModal,
@@ -35,10 +51,44 @@ export default function websites(state = initialState, action = {}) {
                 }
             };
 
+        case types.UPDATE_WEBSITE:
+            const { payload: { websiteUpdate } } = action;
+            const indexUpdate = _.findIndex(state.websites, (o) => {
+                return o.id === websiteUpdate.id;
+            });
+            return {
+                ...state,
+                websites: [
+                    ...state.websites.slice(0, indexUpdate),
+                    websiteUpdate,
+                    ...state.websites.slice(indexUpdate + 1)
+                ],
+                editModal: {
+                    // TODO: make the mode back to whichever mode was used before editing
+                    ...state.editModal,
+                    isShowing: false,
+                    values: initialState.editModal.values,
+                }
+            }
+
+        case types.EDIT_WEBSITE:
+            const { payload: { idEdit } } = action;
+            return {
+                ...state,
+                editModal: {
+                    // TODO: REMOVE POSSIBILITY TO ADD AUTO URL
+                    ...state.editModal,
+                    isShowing: true,
+                    mode: 'custom',
+                    values: state.websites.find(function (o) { return o.id === idEdit; })
+                }
+            };
+            return state;
+
         case types.REMOVE_WEBSITE:
-            const { payload: { id } } = action;
+            const { payload: { idRemove } } = action;
             const index = _.findIndex(state.websites, (o) => {
-                return o.id === id;
+                return o.id === idRemove;
             });
             return {
                 ...state,

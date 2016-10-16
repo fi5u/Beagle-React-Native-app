@@ -63,7 +63,7 @@ CustomInputLayout.propTypes = {
 
     // values
     editModalValues: React.PropTypes.shape({
-        url: React.PropTypes.string.isRequired,
+        url: React.PropTypes.string,
         template: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
         divider: React.PropTypes.string.isRequired,

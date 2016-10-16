@@ -16,11 +16,19 @@ export default class Websites extends Component {
 
     renderRow(item) {
         const swipeoutBtns = [{
-            text: 'Button'
-        }]
+            text: 'Edit',
+            onPress: () => {
+                this.props.editWebsite(item.id);
+            }
+        }];
 
         return(
-            <Swipeout right={swipeoutBtns}>
+            // options: https://www.npmjs.com/package/react-native-swipeout
+            <Swipeout
+                right={swipeoutBtns}
+                autoClose={true}
+                backgroundColor="#eee"
+            >
                 <View>
                     <Text>{item.title}</Text>
                 </View>
@@ -42,7 +50,7 @@ export default class Websites extends Component {
 
                 <ListView
                     dataSource={this.props.websites}
-                    renderRow={this.renderRow}
+                    renderRow={this.renderRow.bind(this)}
                     enableEmptySections={true}
                 />
 
@@ -53,6 +61,7 @@ export default class Websites extends Component {
                     editModal={this.props.editModal}
                     checkAutoUrl={this.props.checkAutoUrl}
                     addNewWebsite={this.props.addNewWebsite}
+                    updateWebsite={this.props.updateWebsite}
                 />
             </Screen>
         )
@@ -67,6 +76,8 @@ Websites.propTypes = {
     setModalInputMode: React.PropTypes.func.isRequired,
     checkAutoUrl: React.PropTypes.func.isRequired,
     addNewWebsite: React.PropTypes.func.isRequired,
+    updateWebsite: React.PropTypes.func.isRequired,
+    editWebsite: React.PropTypes.func.isRequired,
 
     // values
     websites: React.PropTypes.object.isRequired,

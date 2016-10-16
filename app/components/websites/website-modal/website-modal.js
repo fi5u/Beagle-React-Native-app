@@ -61,6 +61,10 @@ export default class WebsiteModal extends Component {
             isValid: this.isFormValid(),
         }];
 
+        if(this.props.editModal.values.id !== null) {
+            headerButtons[1].onPress = () => this.props.updateWebsite(this.props.editModal.values);
+        }
+
         if(this.props.editModal.mode === 'auto') {
             headerButtons[1].onPress = () => this.props.checkAutoUrl(this.props.editModal.values.url);
         }
@@ -105,6 +109,7 @@ WebsiteModal.propTypes = {
     setModalInputMode: React.PropTypes.func.isRequired,
     checkAutoUrl: React.PropTypes.func.isRequired,
     addNewWebsite: React.PropTypes.func.isRequired,
+    updateWebsite: React.PropTypes.func.isRequired,
 
     // values
     editModal: React.PropTypes.shape({

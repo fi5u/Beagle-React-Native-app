@@ -4,13 +4,22 @@ import * as types from './action-types'
 // have a type attribute and then possible payload that the reducer needs to execute
 // the action / alter the application state
 
-export const addNewWebsite = (website) => {
+export const addNewWebsite = (websiteNew) => {
     return {
         type: types.ADD_NEW_WEBSITE,
         payload: {
-            website
+            websiteNew
         }
     };
+}
+
+export const updateWebsite = (websiteUpdate) => {
+    return {
+        type: types.UPDATE_WEBSITE,
+        payload: {
+            websiteUpdate
+        }
+    }
 }
 
 export const removeWebsite = (id) => {
@@ -34,6 +43,15 @@ export const checkAutoUrl = (url) => {
 export const showWebsiteEditModal = () => {
     return {
         type: types.SHOW_WEBSITE_EDIT_MODAL
+    };
+}
+
+export const editWebsite = (idEdit) => {
+    return {
+        type: types.EDIT_WEBSITE,
+        payload: {
+            idEdit
+        }
     };
 }
 
