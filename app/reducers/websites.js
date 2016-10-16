@@ -76,7 +76,6 @@ export default function websites(state = initialState, action = {}) {
             return {
                 ...state,
                 editModal: {
-                    // TODO: REMOVE POSSIBILITY TO ADD AUTO URL
                     ...state.editModal,
                     isShowing: true,
                     mode: 'custom',
@@ -117,7 +116,8 @@ export default function websites(state = initialState, action = {}) {
                 ...state,
                 editModal: {
                     ...state.editModal,
-                    isShowing: false
+                    isShowing: false,
+                    values: initialState.editModal.values,
                 }
             };
 

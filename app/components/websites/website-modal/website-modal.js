@@ -69,6 +69,25 @@ export default class WebsiteModal extends Component {
             headerButtons[1].onPress = () => this.props.checkAutoUrl(this.props.editModal.values.url);
         }
 
+        let tabs = this.props.editModal.values.id === null ?
+            <Tabs
+                selected={this.props.websiteInputMode}
+                onSelect={el => this.props.setModalInputMode(el.props.id)}
+            >
+                <Text
+                    id="auto"
+                >
+                    Auto
+                </Text>
+
+                <Text
+                    id="custom"
+                >
+                    Custom
+                </Text>
+            </Tabs>
+            : null;
+
         return (
             <Modal
                 animationType={'slide'}
@@ -79,22 +98,8 @@ export default class WebsiteModal extends Component {
                     title="Add a website"
                     buttons={headerButtons}
                 />
-                <Tabs
-                    selected={this.props.websiteInputMode}
-                    onSelect={el => this.props.setModalInputMode(el.props.id)}
-                >
-                    <Text
-                        id="auto"
-                    >
-                        Auto
-                    </Text>
 
-                    <Text
-                        id="custom"
-                    >
-                        Custom
-                    </Text>
-                </Tabs>
+                {tabs}
 
                 {layout}
             </Modal>
