@@ -45,6 +45,8 @@ export default class Websites extends Component {
                     value={this.props.query.value}
                     autoCapitalize="none"
                     autoFocus={true}
+                    returnKeyType="go"
+                    clearButtonMode="always"
                 /> : null;
         return(
             // options: https://www.npmjs.com/package/react-native-swipeout
