@@ -29,6 +29,7 @@ class WebsitesContainer extends Component {
                 addNewWebsite={actions.addNewWebsite}
                 updateWebsite={actions.updateWebsite}
                 editWebsite={actions.editWebsite}
+                removeWebsite={actions.removeWebsite}
                 // values
                 websites={websites}
                 settings={settings}

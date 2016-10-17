@@ -22,11 +22,11 @@ export const updateWebsite = (websiteUpdate) => {
     }
 }
 
-export const removeWebsite = (id) => {
+export const removeWebsite = (idRemove) => {
     return {
         type: types.REMOVE_WEBSITE,
         payload: {
-            id
+            idRemove
         }
     };
 }

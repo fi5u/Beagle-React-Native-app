@@ -16,7 +16,14 @@ export default class Websites extends Component {
 
     renderRow(item) {
         const swipeoutBtns = [{
+            text: 'Delete',
+            type: 'secondary',
+            onPress: () => {
+                this.props.removeWebsite(item.id);
+            }
+        }, {
             text: 'Edit',
+            type: 'primary',
             onPress: () => {
                 this.props.editWebsite(item.id);
             }
@@ -78,6 +85,7 @@ Websites.propTypes = {
     addNewWebsite: React.PropTypes.func.isRequired,
     updateWebsite: React.PropTypes.func.isRequired,
     editWebsite: React.PropTypes.func.isRequired,
+    removeWebsite: React.PropTypes.func.isRequired,
 
     // values
     websites: React.PropTypes.object.isRequired,
