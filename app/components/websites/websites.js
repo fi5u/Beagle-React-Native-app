@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import {
     ListView,
     Text,
-    View
+    TextInput,
+    TouchableOpacity,
+    View,
 } from 'react-native'
 import Swipeout from 'react-native-swipeout'
 import Screen from '../layout/screen/screen'
@@ -12,6 +14,10 @@ import WebsiteModal from './website-modal/website-modal'
 export default class Websites extends Component {
     constructor(props) {
         super(props);
+    }
+
+    op() {
+        alert('press');
     }
 
     renderRow(item) {
@@ -29,6 +35,17 @@ export default class Websites extends Component {
             }
         }];
 
+        const queryOutput =
+            this.props.query.id === item.id ?
+                <TextInput
+                    style={{height: 25}}
+                    placeholder="Query"
+                    onChangeText={(text) => this.props.updateQueryValue(text)}
+                    onSubmitEditing={this.props.submitQuery}
+                    value={this.props.query.value}
+                    autoCapitalize="none"
+                    autoFocus={true}
+                /> : null;
         return(
             // options: https://www.npmjs.com/package/react-native-swipeout
             <Swipeout
@@ -36,9 +53,14 @@ export default class Websites extends Component {
                 autoClose={true}
                 backgroundColor="#eee"
             >
-                <View>
+
+                <TouchableOpacity
+                    onPress={() => this.props.activateQuery(item.id)}
+                >
                     <Text>{item.title}</Text>
-                </View>
+                </TouchableOpacity>
+                {queryOutput}
+
             </Swipeout>
         );
     }
@@ -59,6 +81,7 @@ export default class Websites extends Component {
                     dataSource={this.props.websites}
                     renderRow={this.renderRow.bind(this)}
                     enableEmptySections={true}
+                    keyboardShouldPersistTaps={true}
                 />
 
                 <WebsiteModal
@@ -86,9 +109,13 @@ Websites.propTypes = {
     updateWebsite: React.PropTypes.func.isRequired,
     editWebsite: React.PropTypes.func.isRequired,
     removeWebsite: React.PropTypes.func.isRequired,
+    updateQueryValue: React.PropTypes.func.isRequired,
+    submitQuery: React.PropTypes.func.isRequired,
+    activateQuery: React.PropTypes.func.isRequired,
 
     // values
     websites: React.PropTypes.object.isRequired,
     settings: React.PropTypes.object.isRequired,
     editModal: React.PropTypes.object.isRequired,
+    query: React.PropTypes.object.isRequired,
 }

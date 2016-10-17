@@ -30,10 +30,14 @@ class WebsitesContainer extends Component {
                 updateWebsite={actions.updateWebsite}
                 editWebsite={actions.editWebsite}
                 removeWebsite={actions.removeWebsite}
+                updateQueryValue={actions.updateQueryValue}
+                submitQuery={actions.submitQuery}
+                activateQuery={actions.activateQuery}
                 // values
                 websites={websites}
                 settings={settings}
                 editModal={state.editModal}
+                query={state.query}
             />
         );
     }

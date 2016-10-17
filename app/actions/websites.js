@@ -79,3 +79,27 @@ export const setModalInputMode = (mode) => {
         }
     };
 }
+
+export const updateQueryValue = (valueQuery) => {
+    return {
+        type: types.UPDATE_QUERY_VALUE,
+        payload: {
+            valueQuery
+        }
+    }
+}
+
+export const submitQuery = () => {
+    return {
+        type: types.SUBMIT_QUERY
+    }
+}
+
+export const activateQuery = (idQuery) => {
+    return {
+        type: types.ACTIVATE_QUERY,
+        payload: {
+            idQuery
+        }
+    }
+}

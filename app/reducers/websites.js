@@ -30,6 +30,10 @@ const initialState = {
             title: '',
             divider: '',
         }
+    },
+    query: {
+        id: null,
+        value: ''
     }
 };
 
@@ -145,6 +149,31 @@ export default function websites(state = initialState, action = {}) {
                     previousMode: mode,
                 }
             };
+
+        case types.UPDATE_QUERY_VALUE:
+            const { payload: { valueQuery } } = action;
+            return {
+                ...state,
+                query: {
+                    ...state.query,
+                    value: value,
+                }
+            }
+
+        case types.SUBMIT_QUERY:
+            // TODO: submit the query
+            return state;
+
+        case types.ACTIVATE_QUERY:
+            const { payload: { idQuery } } = action;
+            return {
+                ...state,
+                query: {
+                    ...state.query,
+                    value: '',
+                    id: state.query.id !== idQuery ? idQuery : null,
+                }
+            }
 
         default:
             return state;
