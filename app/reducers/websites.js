@@ -22,6 +22,7 @@ const initialState = {
         isShowing: false,
         isFrozen: false,
         mode: 'auto',
+        previousMode: 'auto',
         values: {
             id: null,
             url: '',
@@ -64,7 +65,6 @@ export default function websites(state = initialState, action = {}) {
                     ...state.websites.slice(indexUpdate + 1)
                 ],
                 editModal: {
-                    // TODO: make the mode back to whichever mode was used before editing
                     ...state.editModal,
                     isShowing: false,
                     values: initialState.editModal.values,
@@ -107,7 +107,8 @@ export default function websites(state = initialState, action = {}) {
                 ...state,
                 editModal: {
                     ...state.editModal,
-                    isShowing: true
+                    isShowing: true,
+                    mode: state.editModal.previousMode,
                 }
             };
 
@@ -140,7 +141,8 @@ export default function websites(state = initialState, action = {}) {
                 ...state,
                 editModal: {
                     ...state.editModal,
-                    mode: mode
+                    mode: mode,
+                    previousMode: mode,
                 }
             };
 
