@@ -100,7 +100,11 @@ export default class WebsiteModal extends Component {
                 />
 
                 {tabs}
-
+                <TouchableHighlight
+                    onPress={this.props.makeASandwichWithSecretSauce}
+                >
+                    <Text>Clost after 2secs</Text>
+                </TouchableHighlight>
                 {layout}
             </Modal>
         )

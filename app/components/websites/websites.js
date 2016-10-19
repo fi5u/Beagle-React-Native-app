@@ -94,6 +94,7 @@ export default class Websites extends Component {
                     checkAutoUrl={this.props.checkAutoUrl}
                     addNewWebsite={this.props.addNewWebsite}
                     updateWebsite={this.props.updateWebsite}
+                    makeASandwichWithSecretSauce={this.props.makeASandwichWithSecretSauce}
                 />
             </Screen>
         )
@@ -112,8 +113,10 @@ Websites.propTypes = {
     editWebsite: React.PropTypes.func.isRequired,
     removeWebsite: React.PropTypes.func.isRequired,
     updateQueryValue: React.PropTypes.func.isRequired,
-    submitQuery: React.PropTypes.func.isRequired,
     activateQuery: React.PropTypes.func.isRequired,
+
+    // async
+    submitQuery: React.PropTypes.func.isRequired,
 
     // values
     websites: React.PropTypes.object.isRequired,

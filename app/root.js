@@ -41,7 +41,9 @@ export default class Root extends Component {
                 break;
             default:
                 activePage =
-                    <WebsitesContainer />;
+                    <WebsitesContainer
+                        store={store}
+                    />;
         }
 
         return (

@@ -4,8 +4,8 @@ import * as types from '../actions/action-types'
 const initialState = {
     websites: [{
         id: 0,
-        template: 'http://abc/[?]',
-        title: 'Abc',
+        template: 'https://www.npmjs.com/search?q=[?]',
+        title: 'NPM',
         divider: '+',
     }, {
         id: 1,
@@ -83,7 +83,7 @@ export default function websites(state = initialState, action = {}) {
                     ...state.editModal,
                     isShowing: true,
                     mode: 'custom',
-                    values: state.websites.find(function (o) { return o.id === idEdit; })
+                    values: state.websites.find((o) => { return o.id === idEdit; })
                 }
             };
             return state;
@@ -156,13 +156,9 @@ export default function websites(state = initialState, action = {}) {
                 ...state,
                 query: {
                     ...state.query,
-                    value: value,
+                    value: valueQuery,
                 }
             }
-
-        case types.SUBMIT_QUERY:
-            // TODO: submit the query
-            return state;
 
         case types.ACTIVATE_QUERY:
             const { payload: { idQuery } } = action;
@@ -172,6 +168,16 @@ export default function websites(state = initialState, action = {}) {
                     ...state.query,
                     value: '',
                     id: state.query.id !== idQuery ? idQuery : null,
+                }
+            }
+
+        case types.DEACTIVATE_QUERY:
+            return {
+                ...state,
+                query: {
+                    ...state.query,
+                    value: '',
+                    id: null,
                 }
             }
 

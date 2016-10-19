@@ -89,17 +89,17 @@ export const updateQueryValue = (valueQuery) => {
     }
 }
 
-export const submitQuery = () => {
-    return {
-        type: types.SUBMIT_QUERY
-    }
-}
-
 export const activateQuery = (idQuery) => {
     return {
         type: types.ACTIVATE_QUERY,
         payload: {
             idQuery
         }
+    }
+}
+
+export const deactivateQuery = () => {
+    return {
+        type: types.DEACTIVATE_QUERY
     }
 }
