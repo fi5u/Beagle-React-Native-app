@@ -15,25 +15,37 @@ class WebsitesContainer extends Component {
         super(props);
     }
 
-    fetchSecretSauce() {
-        console.log('about to promise');
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve();
-            }, 2000);
+    fetchTemplate(url) {
+        return fetch('https://beagle-utils.herokuapp.com/gettemplateurl', {
+        //return fetch('localhost:5000/gettemplateurl', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                url: url
+            })
         });
-        //return fetch('https://www.google.com/search?q=secret+sauce');
     }
 
-    makeASandwichWithSecretSauce(forPerson) {
-        //this.store.dispatch(this.actions.hideWebsiteEditModal);
-
-        return (dispatch) => {
-            return this.fetchSecretSauce().then(
-                sauce => dispatch(this.actions.hideWebsiteEditModal),
-                error => dispatch(apologize('The Sandwich Shop', forPerson, error))
-            )
-        };
+    processFetchTemplate(url) {
+        //return (dispatch) => {
+            return this.fetchTemplate(url)
+                .then((response) => response.json())
+                .then((responseData) => {
+                    if(responseData.status === 'success') {
+                        /*dispatch(*/this.actions.addNewWebsite(responseData.template)/*)*/;
+                        /*dispatch(*/this.actions.hideWebsiteEditModal/*)*/;
+                    }
+                    else if(responseData.reason) {
+                        alert(responseData.reason);
+                    }
+                    else {
+                        alert('Something bad happened');
+                    }
+                });
+        //};
     }
 
     submitQuery() {
@@ -55,12 +67,14 @@ class WebsitesContainer extends Component {
             }
         }).catch(err => console.error('An error occurred', err));
 
-        this.store.dispatch(this.actions.deactivateQuery);
+        /*this.store.dispatch(*/this.actions.deactivateQuery/*)*/;
+    }
 
-        /*this.store.dispatch(
-            this.makeASandwichWithSecretSauce('My wife')
-        ).then(() => {
-            console.log('Done!');
+    generateTemplate() {
+        //this.store.dispatch(
+            this.processFetchTemplate(this.state.editModal.values.url)
+        /*).then(() => {
+            console.log('>>> Done!');
         });*/
     }
 
@@ -92,6 +106,7 @@ class WebsitesContainer extends Component {
                 activateQuery={actions.activateQuery}
                 // async
                 submitQuery={this.submitQuery.bind(this)}
+                generateTemplate={this.generateTemplate.bind(this)}
                 // values
                 websites={websites}
                 settings={settings}

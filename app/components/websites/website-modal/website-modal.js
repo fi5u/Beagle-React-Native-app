@@ -101,9 +101,9 @@ export default class WebsiteModal extends Component {
 
                 {tabs}
                 <TouchableHighlight
-                    onPress={this.props.makeASandwichWithSecretSauce}
+                    onPress={this.props.generateTemplate}
                 >
-                    <Text>Clost after 2secs</Text>
+                    <Text>Close after 2secs</Text>
                 </TouchableHighlight>
                 {layout}
             </Modal>
@@ -119,6 +119,9 @@ WebsiteModal.propTypes = {
     checkAutoUrl: React.PropTypes.func.isRequired,
     addNewWebsite: React.PropTypes.func.isRequired,
     updateWebsite: React.PropTypes.func.isRequired,
+
+    // async
+    generateTemplate: React.PropTypes.func.isRequired,
 
     // values
     editModal: React.PropTypes.shape({

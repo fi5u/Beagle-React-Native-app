@@ -94,7 +94,7 @@ export default class Websites extends Component {
                     checkAutoUrl={this.props.checkAutoUrl}
                     addNewWebsite={this.props.addNewWebsite}
                     updateWebsite={this.props.updateWebsite}
-                    makeASandwichWithSecretSauce={this.props.makeASandwichWithSecretSauce}
+                    generateTemplate={this.props.generateTemplate}
                 />
             </Screen>
         )
@@ -117,6 +117,7 @@ Websites.propTypes = {
 
     // async
     submitQuery: React.PropTypes.func.isRequired,
+    generateTemplate: React.PropTypes.func.isRequired,
 
     // values
     websites: React.PropTypes.object.isRequired,
