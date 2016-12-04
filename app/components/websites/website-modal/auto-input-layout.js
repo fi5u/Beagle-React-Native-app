@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
     Text,
     TextInput,
     View
 } from 'react-native'
 import InputText from '../../forms/input-text/input-text'
-import styles from './website-modal.style'
+import styles from './styles'
 
 export default class AutoInputLayout extends Component {
     constructor(props) {
-        super(props);
+        super(props)
     }
 
     render() {
@@ -22,9 +22,9 @@ export default class AutoInputLayout extends Component {
                     id="url"
                     placeholder="Website address"
                     label="Website address"
-                    onChange={this.props.updateWebsiteModalValue}
-                    value={this.props.editModalValues.url}
-                    handleSubmit={this.props.checkAutoUrl}
+                    onChange={this.props.updateValue}
+                    value={this.props.values.url}
+                    handleSubmit={this.props.fetchTemplate}
                     editable={!this.props.isFrozen}
                     clearButtonMode="while-editing" // IOS ONLY
                     keyboardType="url" // IOS ONLY
@@ -35,16 +35,13 @@ export default class AutoInputLayout extends Component {
 }
 
 AutoInputLayout.propTypes = {
-    // actions
-    updateWebsiteModalValue: React.PropTypes.func.isRequired,
-    checkAutoUrl: React.PropTypes.func.isRequired,
-
-    // values
-    editModalValues: React.PropTypes.shape({
-        url: React.PropTypes.string.isRequired,
-        template: React.PropTypes.string.isRequired,
-        title: React.PropTypes.string.isRequired,
-        divider: React.PropTypes.string.isRequired,
+    updateValue: PropTypes.func.isRequired,
+    fetchTemplate: PropTypes.func.isRequired,
+    values: PropTypes.shape({
+        url: PropTypes.string.isRequired,
+        template: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        divider: PropTypes.string.isRequired,
     }).isRequired,
-    isFrozen: React.PropTypes.bool.isRequired,
+    isFrozen: PropTypes.bool.isRequired,
 }

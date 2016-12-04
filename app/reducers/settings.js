@@ -1,8 +1,7 @@
 import * as types from '../actions/action-types'
 
 const initialState = {
-    settings: {
-    }
+    settings: {}
 };
 
 export default function settings(state = initialState, action = {}) {
@@ -15,7 +14,7 @@ export default function settings(state = initialState, action = {}) {
                     ...state.settings,
                     [setting]: !state.settings[setting]
                 }
-            };
+            }
 
         default:
             return state;

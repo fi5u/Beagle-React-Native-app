@@ -1,7 +1,10 @@
+import { combineReducers } from 'redux'
+import edit from './edit'
+import query from './query'
 import websites from './websites'
-import settings from './settings'
 
-export {
+export default combineReducers({
+    edit,
+    query,
     websites,
-    settings
-}
+})

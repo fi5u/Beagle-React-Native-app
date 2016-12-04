@@ -1,22 +1,22 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
     Text,
     TouchableOpacity,
-    View
+    View,
 } from 'react-native'
-import styles from './header.style'
+import styles from './styles'
 
 export default class Header extends Component {
     constructor(props) {
-        super(props);
+        super(props)
     }
 
     generateButtons(button, position) {
         if(button.position !== position) {
-            return;
+            return
         }
 
-        let textStyle = button.isValid === false ? styles.btnTextDisabled : styles.btnText;
+        let textStyle = button.isValid === false ? styles.btnTextDisabled : styles.btnText
 
         return(
             <TouchableOpacity
@@ -34,17 +34,17 @@ export default class Header extends Component {
     }
 
     render() {
-        let primaryBtns;
-        let secondaryBtns;
+        let primaryBtns
+        let secondaryBtns
 
         if(this.props.buttons) {
             primaryBtns = this.props.buttons.map((button) => {
-                return this.generateButtons(button, 'primary');
-            });
+                return this.generateButtons(button, 'primary')
+            })
 
             secondaryBtns = this.props.buttons.map((button) => {
-                return this.generateButtons(button, 'secondary');
-            });
+                return this.generateButtons(button, 'secondary')
+            })
         }
 
 
@@ -75,13 +75,13 @@ export default class Header extends Component {
 }
 
 Header.propTypes = {
-    title: React.PropTypes.string.isRequired,
-    buttons: React.PropTypes.arrayOf(
-        React.PropTypes.shape({
-            position: React.PropTypes.oneOf(['primary', 'secondary']),
-            title: React.PropTypes.string,
-            onPress: React.PropTypes.func,
-            isValid: React.PropTypes.bool,
+    title: PropTypes.string.isRequired,
+    buttons: PropTypes.arrayOf(
+        PropTypes.shape({
+            position: PropTypes.oneOf(['primary', 'secondary']),
+            title: PropTypes.string,
+            onPress: PropTypes.func,
+            isValid: PropTypes.bool,
         })
     ),
 }

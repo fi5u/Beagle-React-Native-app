@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
     View
 } from 'react-native'
-import Header from '../header/header'
-import styles from './screen.style'
+import Header from '../header'
+import styles from './styles'
 
 export default class Screen extends Component {
     constructor(props) {
-        super(props);
+        super(props)
     }
 
     render() {
@@ -32,13 +32,13 @@ export default class Screen extends Component {
 }
 
 Screen.propTypes = {
-    children: React.PropTypes.node,
-    title: React.PropTypes.string,
-    buttons: React.PropTypes.arrayOf(
-        React.PropTypes.shape({
-            position: React.PropTypes.oneOf(['primary', 'secondary']),
-            title: React.PropTypes.string,
-            onPress: React.PropTypes.func,
+    children: PropTypes.node,
+    title: PropTypes.string,
+    buttons: PropTypes.arrayOf(
+        PropTypes.shape({
+            position: PropTypes.oneOf(['primary', 'secondary']),
+            title: PropTypes.string,
+            onPress: PropTypes.func,
         })
     ),
 }

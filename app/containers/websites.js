@@ -1,125 +1,255 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import Swipeout from 'react-native-swipeout'
+import { generateQueryUrl } from '../services/url'
+import {
+    activateQuery,
+    deactivateQuery,
+    startQuery,
+    updateQueryValue,
+    } from '../actions/query'
+import {
+    closeEdit,
+    editWebsite,
+    fetchTemplate,
+    saveWebsite,
+    setEditMode,
+    updateEditValue,
+    } from '../actions/edit'
+import {
+    addNewTemplate,
+    removeWebsite,
+    } from '../actions/websites'
 import {
     Linking,
-    ListView
-} from 'react-native'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import * as websitesActions from '../actions/websites'
-import * as settingsActions from '../actions/settings'
-import generateUrl from '../services/url'
-import Websites from '../components/websites/websites'
+    ListView,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
+    } from 'react-native'
+import Screen from '../components/layout/screen'
+import WebsiteModal from '../components/websites/website-modal'
 
-class WebsitesContainer extends Component {
+class Websites extends Component {
     constructor(props) {
-        super(props);
+        super(props)
+
+        this.renderRow = this.renderRow.bind(this)
+        this.addNewTemplate = this.addNewTemplate.bind(this)
+        this.closeEdit = this.closeEdit.bind(this)
+        this.updateEditValue = this.updateEditValue.bind(this)
+        this.setEditMode = this.setEditMode.bind(this)
+        this.fetchTemplate = this.fetchTemplate.bind(this)
+        this.saveWebsite = this.saveWebsite.bind(this)
+    }
+
+    componentDidMount() {
+
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+    }
+
+    editWebsite(website) {
+        this.props.dispatch(editWebsite(website))
+    }
+
+    addNewTemplate() {
+        this.props.dispatch(addNewTemplate())
+    }
+
+    closeEdit() {
+        this.props.dispatch(closeEdit())
+    }
+
+    updateEditValue(name, value) {
+        this.props.dispatch(updateEditValue(name, value))
+    }
+
+    setEditMode(mode) {
+        this.props.dispatch(setEditMode(mode))
     }
 
     fetchTemplate(url) {
-        return fetch('https://beagle-utils.herokuapp.com/gettemplateurl', {
-        //return fetch('localhost:5000/gettemplateurl', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                url: url
+        this.props.dispatch(fetchTemplate(url))
+    }
+
+    saveWebsite(website) {
+        this.props.dispatch(saveWebsite(website))
+    }
+
+    removeWebsite(id) {
+        this.props.dispatch(removeWebsite(id))
+    }
+
+    toggleQuery(id) {
+        if(this.props.query.queriedWebsite === id) {
+            this.props.dispatch(deactivateQuery())
+        }
+        else {
+            this.props.dispatch(activateQuery(id))
+        }
+    }
+
+    updateQueryValue(newValue) {
+        this.props.dispatch(updateQueryValue(newValue))
+    }
+
+    startQuery(website) {
+        const url = generateQueryUrl(this.props.query.currentValue, website)
+        this.props.dispatch(startQuery(website))
+
+        Linking.canOpenURL(url)
+            .then(supported => {
+                if(!supported) {
+                    console.log('Can\'t handle url: ' + url)
+                    // TODO: show + log some error message
+                } else {
+                    Linking.openURL(url)
+                }
             })
-        });
+            .catch(err => console.error('An error occurred', err))
     }
 
-    processFetchTemplate(url) {
-        //return (dispatch) => {
-            return this.fetchTemplate(url)
-                .then((response) => response.json())
-                .then((responseData) => {
-                    if(responseData.status === 'success') {
-                        /*dispatch(*/this.actions.addNewWebsite(responseData.template)/*)*/;
-                        /*dispatch(*/this.actions.hideWebsiteEditModal/*)*/;
-                    }
-                    else if(responseData.reason) {
-                        alert(responseData.reason);
-                    }
-                    else {
-                        alert('Something bad happened');
-                    }
-                });
-        //};
-    }
-
-    submitQuery() {
-        const qID = this.state.query.id;
-        const qValue = this.state.query.value;
-
-        if(qID === null || !qValue) { return; } // TODO: show + log some error message
-        const website = this.state.websites.find((o) => { return o.id === qID; });
-        if(!website) { return; } // TODO: show + log some error message
-
-        const url = generateUrl(qValue, website);
-
-        Linking.canOpenURL(url).then(supported => {
-            if(!supported) {
-                console.log('Can\'t handle url: ' + url);
-                // TODO: show + log some error message
-            } else {
-                return Linking.openURL(url);
+    renderRow(item) {
+        const swipeoutBtns = [{
+            text: 'Delete',
+            type: 'secondary',
+            onPress: () => {
+                this.removeWebsite(item.id)
             }
-        }).catch(err => console.error('An error occurred', err));
+        }, {
+            text: 'Edit',
+            type: 'primary',
+            onPress: () => {
+                this.editWebsite(item)
+            }
+        }]
 
-        /*this.store.dispatch(*/this.actions.deactivateQuery/*)*/;
-    }
+        const queryOutput =
+            this.props.query.queriedWebsite === item.id ?
+                <TextInput
+                    style={{height: 25}}
+                    placeholder="Query"
+                    onChangeText={text => this.updateQueryValue(text)}
+                    onSubmitEditing={() => this.startQuery(item)}
+                    value={this.props.query.currentValue}
+                    autoCapitalize="none"
+                    autoFocus={true}
+                    returnKeyType="go"
+                    clearButtonMode="always"
+                /> : null;
+        return(
+            // options: https://www.npmjs.com/package/react-native-swipeout
+            <Swipeout
+                right={swipeoutBtns}
+                autoClose={true}
+                backgroundColor="#eee"
+            >
 
-    generateTemplate() {
-        //this.store.dispatch(
-            this.processFetchTemplate(this.state.editModal.values.url)
-        /*).then(() => {
-            console.log('>>> Done!');
-        });*/
+                <TouchableOpacity
+                    onPress={() => this.toggleQuery(item.id)}
+                >
+                    <Text>{item.title}</Text>
+                </TouchableOpacity>
+                {queryOutput}
+
+            </Swipeout>
+        )
     }
 
     render() {
-        const { store, state, actions } = this.props;
+        const {
+            websites,
+            modal,
+        } = this.props
 
-        const dataStore = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        const websites = dataStore.cloneWithRows(state.websites);
-        const settings = state.settings;
+        const dataStore = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+        const rows = dataStore.cloneWithRows(websites)
 
-        this.store = store;
-        this.state = state;
-        this.actions = actions;
+        return(
+            <Screen
+                title="Websites"
+                buttons={[{
+                    position: 'primary',
+                    title: 'Add',
+                    onPress: this.addNewTemplate
+                }]}
+            >
 
-        return (
-            <Websites
-                // actions
-                showWebsiteEditModal={actions.showWebsiteEditModal}
-                hideWebsiteEditModal={actions.hideWebsiteEditModal}
-                updateWebsiteModalValue={actions.updateWebsiteModalValue}
-                setModalInputMode={actions.setModalInputMode}
-                checkAutoUrl={actions.checkAutoUrl}
-                addNewWebsite={actions.addNewWebsite}
-                updateWebsite={actions.updateWebsite}
-                editWebsite={actions.editWebsite}
-                removeWebsite={actions.removeWebsite}
-                updateQueryValue={actions.updateQueryValue}
-                submitQuery={actions.submitQuery}
-                activateQuery={actions.activateQuery}
-                // async
-                submitQuery={this.submitQuery.bind(this)}
-                generateTemplate={this.generateTemplate.bind(this)}
-                // values
-                websites={websites}
-                settings={settings}
-                editModal={state.editModal}
-                query={state.query}
-            />
-        );
+                <ListView
+                    dataSource={rows}
+                    renderRow={this.renderRow}
+                    enableEmptySections={true}
+                    keyboardShouldPersistTaps={true}
+                />
+
+                <WebsiteModal
+                    modal={modal}
+                    close={this.closeEdit}
+                    updateValue={this.updateEditValue}
+                    setMode={this.setEditMode}
+                    fetchTemplate={this.fetchTemplate}
+                    saveWebsite={this.saveWebsite}
+                    updateWebsite={this.props.updateWebsite}
+                    generateTemplate={this.props.generateTemplate}
+                />
+            </Screen>
+        )
     }
 }
 
-export default connect(state => ({
-        state: {...state.websites,...state.settings}
-    }), (dispatch) => ({
-        actions: bindActionCreators({...websitesActions,...settingsActions}, dispatch)
-    })
-)(WebsitesContainer);
+Websites.propTypes = {
+    websites: PropTypes.array.isRequired,
+    modal: PropTypes.shape({
+        isShowing: PropTypes.bool.isRequired,
+        isFrozen: PropTypes.bool.isRequired,
+        mode: PropTypes.oneOf([
+            'auto',
+            'custom',
+        ]).isRequired,
+        previousMode: PropTypes.string.isRequired,
+        values: PropTypes.shape({
+            url: PropTypes.string,
+            template: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            divider: PropTypes.string.isRequired,
+        }).isRequired,
+        message: PropTypes.string.isRequired,
+        messageStatus: PropTypes.string.isRequired,
+    }).isRequired,
+    dispatch: PropTypes.func.isRequired,
+}
+
+function denormalize(items) {
+    const returnArray = []
+    for(const key of Object.keys(items.byId)) {
+        returnArray.push(items.byId[key])
+    }
+    return returnArray
+}
+
+function mapStateToProps(state) {
+    const { websites, edit, query } = state
+
+    const modal = {
+        isShowing: edit.isEditShowing,
+        isFrozen: edit.isEditFrozen,
+        mode: edit.editMode,
+        previousMode: edit.previousEditMode,
+        editId: edit.editId,
+        values: edit.editValues,
+        message: edit.editMessage,
+        messageStatus: edit.editMessageStatus,
+    }
+
+    return {
+        websites: denormalize(websites),
+        modal,
+        query,
+    }
+}
+
+export default connect(mapStateToProps)(Websites)
