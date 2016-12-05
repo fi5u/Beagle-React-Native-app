@@ -79,6 +79,8 @@ function receiveTemplate(response) {
 }
 
 export function saveWebsite(website) {
+    console.log('>>>>>> edit.js website = ');
+    console.log(website);
     if(website.id) {
         return {
             type: types.UPDATE_WEBSITE,

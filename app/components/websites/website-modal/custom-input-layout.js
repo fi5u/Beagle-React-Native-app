@@ -10,6 +10,22 @@ import styles from './styles'
 export default class CustomInputLayout extends Component {
     constructor(props) {
         super(props)
+
+        this.setTitleRef = this.setTitleRef.bind(this)
+        this.templateSubmit = this.templateSubmit.bind(this)
+        this.titleSubmit = this.titleSubmit.bind(this)
+    }
+
+    templateSubmit() {
+        this.titleRef.focus()
+    }
+
+    titleSubmit() {
+        this.props.submit()
+    }
+
+    setTitleRef(ref) {
+        this.titleRef = ref
     }
 
     render() {
@@ -34,6 +50,7 @@ export default class CustomInputLayout extends Component {
                     value={this.props.values.template}
                     editable={!this.props.isFrozen}
                     keyboardType="url" // IOS ONLY
+                    handleSubmit={this.templateSubmit}
                 />
 
                 <InputText
@@ -41,8 +58,11 @@ export default class CustomInputLayout extends Component {
                     placeholder="Website title"
                     label="Website title"
                     onChange={this.props.updateValue}
+                    handleSubmit={this.titleSubmit}
                     value={this.props.values.title}
                     editable={!this.props.isFrozen}
+                    targetRef={this.titleTargetRef}
+                    setRef={this.setTitleRef}
                 />
 
                 <InputPicker
@@ -66,4 +86,5 @@ CustomInputLayout.propTypes = {
         divider: React.PropTypes.string.isRequired,
     }).isRequired,
     isFrozen: React.PropTypes.bool.isRequired,
+    submit: React.PropTypes.func.isRequired,
 }

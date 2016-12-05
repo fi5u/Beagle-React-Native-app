@@ -15,6 +15,8 @@ import styles from './styles'
 export default class WebsiteModal extends Component {
     constructor(props) {
         super(props)
+
+        this.saveWebsite = this.saveWebsite.bind(this)
     }
 
     isFormValid() {
@@ -29,6 +31,11 @@ export default class WebsiteModal extends Component {
         }
     }
 
+    saveWebsite() {
+        if(!this.isFormValid()) { return }
+        this.props.saveWebsite(this.props.modal.values)
+    }
+
     render() {
         let layout
         switch(this.props.modal.mode) {
@@ -38,6 +45,7 @@ export default class WebsiteModal extends Component {
                         updateValue={this.props.updateValue}
                         values={this.props.modal.values}
                         isFrozen={this.props.modal.isFrozen}
+                        submit={this.saveWebsite}
                     />
                     break
             default:
@@ -57,7 +65,7 @@ export default class WebsiteModal extends Component {
         }, {
             position: 'primary',
             title: 'Save',
-            onPress: () => this.props.saveWebsite({...this.props.modal.values,...{id: this.props.modal.editId}}),
+            onPress: () => this.saveWebsite({...this.props.modal.values,...{id: this.props.modal.editId}}),
             isValid: this.isFormValid(),
         }]
 

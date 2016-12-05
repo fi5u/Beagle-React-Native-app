@@ -10,6 +10,12 @@ export default class InputText extends Component {
         super(props);
     }
 
+    componentDidMount() {
+        if(this.props.setRef) {
+            this.props.setRef(this.textInput)
+        }
+    }
+
     render() {
         return (
             <FormItem
@@ -18,12 +24,13 @@ export default class InputText extends Component {
                 <TextInput
                     style={styles.base}
                     placeholder={this.props.placeholder}
-                    onChangeText={(text) => this.props.onChange(this.props.id, text)}
+                    onChangeText={text => this.props.onChange(this.props.id, text)}
                     onSubmitEditing={() => this.props.handleSubmit(this.props.value)}
                     value={this.props.value}
                     editable={this.props.editable}
                     keyboardType={this.props.keyboardType}
                     autoCapitalize={this.props.keyboardType === 'url' ? 'none' : null}
+                    ref={input => { this.textInput = input }}
                 />
             </FormItem>
         )
@@ -39,4 +46,5 @@ InputText.propTypes = {
     editable: React.PropTypes.bool,
     label: React.PropTypes.string,
     keyboardType: React.PropTypes.string,
+    setRef: React.PropTypes.func,
 }
