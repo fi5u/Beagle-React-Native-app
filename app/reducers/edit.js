@@ -14,6 +14,7 @@ const initialState = {
     },
     editMessage: '',
     editMessageStatus: 'error',
+    invalidField: '',
 }
 
 export default function websites(state = initialState, action) {
@@ -45,7 +46,9 @@ export default function websites(state = initialState, action) {
                 editValues: {
                     ...state.editValues,
                     [action.name]: action.value,
-                }
+                },
+                invalidField: '',
+                editMessage: '',
             })
 
         case types.CLOSE_EDIT:
@@ -67,6 +70,13 @@ export default function websites(state = initialState, action) {
                 editMessage: action.message || 'Ooops, something went wrong!',
                 editMessageStatus: 'error',
                 isEditFrozen: false,
+            })
+
+        case types.SET_INVALID_FIELD:
+            return Object.assign({}, state, {
+                invalidField: action.fieldName,
+                editMessage: action.fieldName === 'template' ? 'Should contain the placeholder [?]' : null,
+                editMessageStatus: 'error',
             })
 
         default:

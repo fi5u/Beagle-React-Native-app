@@ -32,7 +32,15 @@ export default class WebsiteModal extends Component {
     }
 
     saveWebsite() {
-        if(!this.isFormValid()) { return }
+        if(!this.isFormValid()) {
+            if(!validate(this.props.modal.values.template, 'template')) {
+                this.props.setInvalid('template')
+            }
+            else if(!validate(this.props.modal.values.title, ['min-length', 1])) {
+                this.props.setInvalid('title')
+            }
+            return
+        }
         this.props.saveWebsite(this.props.modal.values)
     }
 
@@ -46,6 +54,7 @@ export default class WebsiteModal extends Component {
                         values={this.props.modal.values}
                         isFrozen={this.props.modal.isFrozen}
                         submit={this.saveWebsite}
+                        invalidField={this.props.modal.invalidField}
                     />
                     break
             default:
@@ -133,10 +142,12 @@ WebsiteModal.propTypes = {
         }).isRequired,
         message: PropTypes.string,
         messageStatus: PropTypes.string,
+        invalidField: PropTypes.string.isRequired,
     }).isRequired,
     close: PropTypes.func.isRequired,
     updateValue: PropTypes.func.isRequired,
     setMode: PropTypes.func.isRequired,
     fetchTemplate: PropTypes.func.isRequired,
     saveWebsite: PropTypes.func.isRequired,
+    setInvalid: PropTypes.func.isRequired,
 }

@@ -14,6 +14,7 @@ import {
     fetchTemplate,
     saveWebsite,
     setEditMode,
+    setInvalidField,
     updateEditValue,
     } from '../actions/edit'
 import {
@@ -42,6 +43,7 @@ class Websites extends Component {
         this.setEditMode = this.setEditMode.bind(this)
         this.fetchTemplate = this.fetchTemplate.bind(this)
         this.saveWebsite = this.saveWebsite.bind(this)
+        this.setInvalid = this.setInvalid.bind(this)
     }
 
     componentDidMount() {
@@ -95,6 +97,10 @@ class Websites extends Component {
 
     updateQueryValue(newValue) {
         this.props.dispatch(updateQueryValue(newValue))
+    }
+
+    setInvalid(fieldName) {
+        this.props.dispatch(setInvalidField(fieldName))
     }
 
     startQuery(website) {
@@ -195,6 +201,7 @@ class Websites extends Component {
                     saveWebsite={this.saveWebsite}
                     updateWebsite={this.props.updateWebsite}
                     generateTemplate={this.props.generateTemplate}
+                    setInvalid={this.setInvalid}
                 />
             </Screen>
         )
@@ -219,6 +226,7 @@ Websites.propTypes = {
         }).isRequired,
         message: PropTypes.string.isRequired,
         messageStatus: PropTypes.string.isRequired,
+        invalidField: PropTypes.string.isRequired,
     }).isRequired,
     dispatch: PropTypes.func.isRequired,
 }
@@ -243,6 +251,7 @@ function mapStateToProps(state) {
         values: edit.editValues,
         message: edit.editMessage,
         messageStatus: edit.editMessageStatus,
+        invalidField: edit.invalidField,
     }
 
     return {

@@ -51,6 +51,7 @@ export default class CustomInputLayout extends Component {
                     editable={!this.props.isFrozen}
                     keyboardType="url" // IOS ONLY
                     handleSubmit={this.templateSubmit}
+                    isInvalid={this.props.invalidField === 'template'}
                 />
 
                 <InputText
@@ -63,6 +64,7 @@ export default class CustomInputLayout extends Component {
                     editable={!this.props.isFrozen}
                     targetRef={this.titleTargetRef}
                     setRef={this.setTitleRef}
+                    isInvalid={this.props.invalidField === 'title'}
                 />
 
                 <InputPicker
@@ -87,4 +89,5 @@ CustomInputLayout.propTypes = {
     }).isRequired,
     isFrozen: React.PropTypes.bool.isRequired,
     submit: React.PropTypes.func.isRequired,
+    invalidField: React.PropTypes.string.isRequired,
 }

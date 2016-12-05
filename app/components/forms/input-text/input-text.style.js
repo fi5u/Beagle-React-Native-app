@@ -1,9 +1,17 @@
 import {StyleSheet} from 'react-native'
 
+const baseStyle = {
+    borderWidth: 1,
+    height: 40,
+}
+
 const Styles = StyleSheet.create({
-    base: {
-        borderWidth: 1,
-        height: 40,
+    base: baseStyle,
+    baseInvalid: {
+        ...baseStyle,
+        ...{
+            borderColor: 'red',
+        }
     },
 })
 

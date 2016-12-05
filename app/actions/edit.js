@@ -79,8 +79,6 @@ function receiveTemplate(response) {
 }
 
 export function saveWebsite(website) {
-    console.log('>>>>>> edit.js website = ');
-    console.log(website);
     if(website.id) {
         return {
             type: types.UPDATE_WEBSITE,
@@ -90,5 +88,12 @@ export function saveWebsite(website) {
     return {
         type: types.SAVE_WEBSITE,
         website,
+    }
+}
+
+export function setInvalidField(fieldName) {
+    return {
+        type: types.SET_INVALID_FIELD,
+        fieldName,
     }
 }

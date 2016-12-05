@@ -16,13 +16,19 @@ export default class InputText extends Component {
         }
     }
 
+    componentDidUpdate() {
+        if(this.props.isInvalid) {
+            this.textInput.focus()
+        }
+    }
+
     render() {
         return (
             <FormItem
                 label={this.props.label}
             >
                 <TextInput
-                    style={styles.base}
+                    style={this.props.isInvalid ? styles.baseInvalid : styles.base}
                     placeholder={this.props.placeholder}
                     onChangeText={text => this.props.onChange(this.props.id, text)}
                     onSubmitEditing={() => this.props.handleSubmit(this.props.value)}
@@ -47,4 +53,5 @@ InputText.propTypes = {
     label: React.PropTypes.string,
     keyboardType: React.PropTypes.string,
     setRef: React.PropTypes.func,
+    isInvalid: React.PropTypes.bool,
 }
