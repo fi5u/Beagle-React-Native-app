@@ -28,6 +28,7 @@ export default class AutoInputLayout extends Component {
                     editable={!this.props.isFrozen}
                     clearButtonMode="while-editing" // IOS ONLY
                     keyboardType="url" // IOS ONLY
+                    autoFocus={true}
                 />
             </View>
         )

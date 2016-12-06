@@ -37,6 +37,7 @@ export default class InputText extends Component {
                     keyboardType={this.props.keyboardType}
                     autoCapitalize={this.props.keyboardType === 'url' ? 'none' : null}
                     ref={input => { this.textInput = input }}
+                    autoFocus={this.props.autoFocus}
                 />
             </FormItem>
         )
@@ -54,4 +55,5 @@ InputText.propTypes = {
     keyboardType: React.PropTypes.string,
     setRef: React.PropTypes.func,
     isInvalid: React.PropTypes.bool,
+    autoFocus: React.PropTypes.bool,
 }

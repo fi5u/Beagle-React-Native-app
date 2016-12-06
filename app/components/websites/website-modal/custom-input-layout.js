@@ -52,6 +52,7 @@ export default class CustomInputLayout extends Component {
                     keyboardType="url" // IOS ONLY
                     handleSubmit={this.templateSubmit}
                     isInvalid={this.props.invalidField === 'template'}
+                    autoFocus={true}
                 />
 
                 <InputText
