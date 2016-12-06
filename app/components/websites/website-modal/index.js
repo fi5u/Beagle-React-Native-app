@@ -107,18 +107,24 @@ export default class WebsiteModal extends Component {
                 transparent={false}
                 visible={this.props.modal.isShowing}
             >
-                <Header
-                    title="Add a website"
-                    buttons={headerButtons}
-                />
+                <View
+                    style={{
+                        height: this.props.modal.height
+                    }}
+                >
+                    <Header
+                        title="Add a website"
+                        buttons={headerButtons}
+                    />
 
-                {tabs}
+                    {tabs}
 
-                {layout}
+                    {layout}
 
-                {this.props.modal.message ?
-                    <Text>{this.props.modal.message}</Text>
-                : null}
+                    {this.props.modal.message ?
+                        <Text>{this.props.modal.message}</Text>
+                    : null}
+                </View>
             </Modal>
         )
     }
@@ -143,6 +149,7 @@ WebsiteModal.propTypes = {
         message: PropTypes.string,
         messageStatus: PropTypes.string,
         invalidField: PropTypes.string.isRequired,
+        height: PropTypes.number.isRequired,
     }).isRequired,
     close: PropTypes.func.isRequired,
     updateValue: PropTypes.func.isRequired,

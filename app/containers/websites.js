@@ -240,7 +240,12 @@ function denormalize(items) {
 }
 
 function mapStateToProps(state) {
-    const { websites, edit, query } = state
+    const {
+        edit,
+        query,
+        ui,
+        websites,
+    } = state
 
     const modal = {
         isShowing: edit.isEditShowing,
@@ -252,6 +257,7 @@ function mapStateToProps(state) {
         message: edit.editMessage,
         messageStatus: edit.editMessageStatus,
         invalidField: edit.invalidField,
+        height: ui.visibleHeight,
     }
 
     return {
