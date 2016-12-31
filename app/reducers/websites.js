@@ -3,13 +3,14 @@ import * as types from '../actions/action-types'
 
 const initialState = {
     byId: {
-        '0': {
+        /*'0': {
             id: 0,
             url: 'www.abc.com',
             template: 'www.abc.com/[?]',
             title: 'Abc',
             divider: '+',
-        }
+            iconPath: '',
+        }*/
     },
     allIds: [0],
 }

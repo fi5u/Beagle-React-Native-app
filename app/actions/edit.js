@@ -1,4 +1,6 @@
+import Sanitize from 'sanitize-filename'
 import * as types from './action-types'
+import RNFetchBlob from 'react-native-fetch-blob'
 
 export function editWebsite(website) {
     return {
@@ -48,9 +50,10 @@ function processFetchTemplate(url) {
             })
         }
         dispatch(requestTemplate(url))
-        return fetch('https://beagle-utils.herokuapp.com/gettemplateurl', fetchParams)
+        return fetch('http://localhost:5000/gettemplateurl', fetchParams)
+        //return fetch('https://beagle-utils.herokuapp.com/gettemplateurl', fetchParams)
             .then(response => response.json())
-            .then(json => dispatch(receiveTemplate(json)))
+            .then(json => dispatch(receiveTemplate(json, dispatch)))
             .catch(error => {
                 /* TODO: log error */
                 console.log(error)
@@ -65,16 +68,40 @@ function requestTemplate(url) {
     }
 }
 
-function receiveTemplate(response) {
-    if(response.status === 'success' && response.template) {
+function receiveTemplate(response, dispatch) {
+    if(response.status !== 'success' || !response.template) {
         return {
-            type: types.SAVE_WEBSITE,
-            template: response.template,
+            type: types.RECEIVE_TEMPLATE_ERROR,
+            message: response.reason,
         }
     }
+    else if(response.template.faviconUrl) {
+        let dirs = RNFetchBlob.fs.dirs
+        let dir = Sanitize(response.template.title) || new Date().getTime()
+        RNFetchBlob
+            .config({
+                fileCache : true,
+                path : `${dirs.DocumentDir}/${dir}/${response.template.faviconUrl.split('/').pop()}`,
+            })
+            .fetch('GET', response.template.faviconUrl)
+            .then(res => {
+                response.template.iconPath = res.path()
+                dispatch(receiveTemplateSuccess(response))
+            }, error => {
+                console.log('Favicon save failed!')
+                console.log(error)
+                dispatch(receiveTemplateSuccess(response))
+            })
+    }
+    else {
+        dispatch(receiveTemplateSuccess(response))
+    }
+}
+
+function receiveTemplateSuccess(response) {
     return {
-        type: types.RECEIVE_TEMPLATE_ERROR,
-        message: response.reason,
+        type: types.SAVE_WEBSITE,
+        website: response.template,
     }
 }
 

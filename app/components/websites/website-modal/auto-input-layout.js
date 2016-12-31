@@ -29,6 +29,8 @@ export default class AutoInputLayout extends Component {
                     clearButtonMode="while-editing" // IOS ONLY
                     keyboardType="url" // IOS ONLY
                     autoFocus={true}
+                    autoCorrect={false}
+                    autoCapitalize="none"
                 />
             </View>
         )

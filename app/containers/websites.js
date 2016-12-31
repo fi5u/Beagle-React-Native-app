@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import RNFetchBlob from 'react-native-fetch-blob'
 import Swipeout from 'react-native-swipeout'
 import { generateQueryUrl } from '../services/url'
 import {
@@ -22,6 +23,7 @@ import {
     removeWebsite,
     } from '../actions/websites'
 import {
+    Image,
     Linking,
     ListView,
     Text,
@@ -159,6 +161,10 @@ class Websites extends Component {
                     onPress={() => this.toggleQuery(item.id)}
                 >
                     <Text>{item.title}</Text>
+                    <Image
+                        style={{width: 50, height: 50}}
+                        source={{uri: item.iconPath}}
+                    />
                 </TouchableOpacity>
                 {queryOutput}
 
@@ -184,7 +190,6 @@ class Websites extends Component {
                     onPress: this.addNewTemplate
                 }]}
             >
-
                 <ListView
                     dataSource={rows}
                     renderRow={this.renderRow}
